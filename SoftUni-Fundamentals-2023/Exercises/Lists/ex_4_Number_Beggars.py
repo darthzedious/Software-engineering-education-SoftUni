@@ -12,4 +12,3 @@ while start_index < count_of_beggars:
     final_list.append(sum_for_current_beggar)
     start_index += 1
 print(final_list)
-and int(cmnd[2]) in gifts
