@@ -11,7 +11,7 @@ for i in range(len(new_list)):
         new_list[i] += 1
         people_on_the_current_wagon += 1
         if people_on_the_lift + people_on_the_current_wagon == people_waiting_for_lift:
-            NoMorePeople = True
+            no_more_people = True
             break
     people_on_the_lift += people_on_the_current_wagon
     if no_more_people:
