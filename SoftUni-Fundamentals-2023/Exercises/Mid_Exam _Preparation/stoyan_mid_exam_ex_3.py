@@ -32,4 +32,3 @@ while True:
         messages = list(str(i) for i in command.split() if i != "Spam")
         for i in range(len(messages)):
             chat.append(messages[i])
-
