@@ -13,7 +13,6 @@ while command != "Craft!":
         if old_item in journal:
             journal.insert(journal.index(old_item) + 1, new_item)
     elif order == "Renew":
-
         if item in journal:
             journal.remove(item)
             journal.append(item)
