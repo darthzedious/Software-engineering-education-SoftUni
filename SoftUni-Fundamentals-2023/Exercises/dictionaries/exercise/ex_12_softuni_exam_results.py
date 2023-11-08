@@ -15,7 +15,6 @@ while True:
         if language not in language_data.keys():
             language_data[language] = []
         language_data[language].append(points)
-
     else:
         username = command.split("-")[0]
         if username in points_data.keys():
