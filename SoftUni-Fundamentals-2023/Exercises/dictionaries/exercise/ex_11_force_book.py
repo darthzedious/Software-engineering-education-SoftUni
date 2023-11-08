@@ -24,7 +24,6 @@ while True:
             force_users[force_side] = []
         force_users[force_side].append(force_user)
         print(f"{force_user} joins the {force_side} side!")
-
 for force_side, force_user in force_users.items():
     if len(force_user) > 0:
         print(f"Side: {force_side}, Members: {len(force_user)}")
