@@ -16,11 +16,11 @@ for contest, info in judge_data.items():
     print(f"{contest}: {len(info)} participants")
     sorted_by_points = dict(sorted(info.items(), key=lambda item: (-item[1], item[0])))
     for rank, (name, points) in enumerate(sorted_by_points.items(), start=1):
-        print(f"{rank}. {name} < : : > {points}")
+        print(f"{rank}. {name} <::> {points}")
 
 total_points = {}
 for contest, username in judge_data.items():
-    user_total_points = 0
+
     for key, value in username.items():
         if key not in total_points:
             total_points[key] = value
