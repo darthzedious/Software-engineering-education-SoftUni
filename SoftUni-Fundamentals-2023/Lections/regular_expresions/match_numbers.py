@@ -6,4 +6,3 @@ matches = re.finditer(regex, numbers)
 
 for match in matches:
     print(match.group(), end=" ")
-    
