@@ -32,6 +32,7 @@ while True:
             plants[plant_name]["ratings"] = []
         else:
             print("error")
+
 print("Plants for the exhibition:")
 for plant, info in plants.items():
     plant_rarity = info["rarity"]
