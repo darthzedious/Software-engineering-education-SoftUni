@@ -20,7 +20,6 @@ for contest, info in judge_data.items():
 
 total_points = {}
 for contest, username in judge_data.items():
-
     for key, value in username.items():
         if key not in total_points:
             total_points[key] = value
