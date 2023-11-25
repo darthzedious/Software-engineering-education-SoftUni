@@ -6,6 +6,7 @@ for i in range(number_of_cars):
     mileage = int(mileage)
     fuel = int(fuel)
     cars[car] = [mileage, fuel]
+
 while True:
     command = input()
     if command == "Stop":

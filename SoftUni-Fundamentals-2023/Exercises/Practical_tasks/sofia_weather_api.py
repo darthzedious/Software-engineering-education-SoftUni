@@ -18,7 +18,6 @@ def get_weather():
         hourly = date["hourly"]
         return current, daily, hourly
 
-
     except requests.exceptions.RequestException as e:
         print("Error", e)
 
