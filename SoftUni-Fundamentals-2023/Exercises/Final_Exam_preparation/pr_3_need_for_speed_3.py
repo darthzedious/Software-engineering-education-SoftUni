@@ -44,3 +44,4 @@ while True:
 
 for car in cars:
     print(f"{car} -> Mileage: {cars[car][0]} kms, Fuel in the tank: {cars[car][1]} lt.")
+
