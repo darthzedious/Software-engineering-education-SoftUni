@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../.idea/GitHub.iml" filepath="$PROJECT_DIR$/../.idea/GitHub.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Software-engineering-education-SoftUni.iml" filepath="$PROJECT_DIR$/.idea/Software-engineering-education-SoftUni.iml" />
+      <module fileurl="file://$USER_HOME$/PycharmProjects/pythonProjectBasic/.idea/pythonProjectBasic.iml" filepath="$USER_HOME$/PycharmProjects/pythonProjectBasic/.idea/pythonProjectBasic.iml" />
     </modules>
   </component>
 </project>

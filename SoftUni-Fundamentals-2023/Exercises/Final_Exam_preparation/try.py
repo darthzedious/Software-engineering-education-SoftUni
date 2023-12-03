@@ -1,5 +1,6 @@
 import re
 
+
 def validate_input(input_str):
     pattern = r'^\|([A-Z]{4,})\|:#([A-Za-z]+\s[A-Za-z]+)#$'
     match = re.match(pattern, input_str)
