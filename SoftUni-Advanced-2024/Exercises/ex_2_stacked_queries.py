@@ -22,7 +22,7 @@ for turn in range(n):
                 if stack[x] < min_number:
                     min_number = stack[x]
             print(min_number)
-
+# instead of using the min() and max() builtins I decided to implement my own logyc.
 while stack:
     print(stack.pop(), end="")
     if stack:
