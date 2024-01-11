@@ -10,7 +10,7 @@ while info != "END":
         cars.append(info)
     else:
         current_green = green_window
-        
+
         while current_green > 0 and cars:
             car = cars.popleft()
             time = current_green + free_window
