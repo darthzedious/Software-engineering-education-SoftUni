@@ -17,7 +17,6 @@ while cups_capacity and bottles_capacity:
             watter_left = bottle - cup
             wasted_litters += watter_left
 
-
 cups_capacity = list(cups_capacity)
 bottles_capacity = list(bottles_capacity)
 
