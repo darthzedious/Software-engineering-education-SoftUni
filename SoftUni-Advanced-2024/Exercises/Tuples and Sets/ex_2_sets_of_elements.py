@@ -1,6 +1,5 @@
-n, m = input().split()
-n = int(n)
-m = int(m)
+n, m = [int(num) for num in input().split()]
+
 col_1 = set()
 col_2 = set()
 for _ in range(n):
