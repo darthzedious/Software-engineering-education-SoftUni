@@ -16,7 +16,7 @@ while chocolates and shakes and shake_counter != 5:
         chocolate -= 5
         chocolates.append(chocolate)
         shakes.append(shake)
-        
+
 if shake_counter == 5:
     print(f"Great! You made all the chocolate milkshakes needed!")
 else:
