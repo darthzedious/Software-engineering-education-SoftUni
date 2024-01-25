@@ -1,4 +1,5 @@
 rows, cols = [int(x) for x in input().split()]
+
 directions = {
     "L": [0, -1],
     "R": [0, +1],

@@ -1,9 +1,5 @@
-if matrix[r][c] == "B":
-    if matrix[r][c - 1] in range(len(matrix[r])):
-        matrix[r][c - 1] = "B"
-    if matrix[r][c + 1] in range(len(matrix[r])):
-        matrix[r][c + 1] = "B"
-    if matrix[r - 1][c] in range(len(matrix[r])):
-        matrix[r - 1][c] = "B"
-    if matrix[r + 1][c] in range(len(matrix[r])):
-        matrix[r + 1][c] = "B"
+nominal = 1000
+price = 0
+
+number = (nominal - price)/price
+print((number + 1)**6-1)
