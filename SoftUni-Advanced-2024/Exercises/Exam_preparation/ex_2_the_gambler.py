@@ -30,9 +30,11 @@ while command != "end":
     if matrix[row][col] == "W":
         gambler_money += 100
         matrix[row][col] = "-"
+
     elif matrix[row][col] == "P":
         gambler_money -= 200
         matrix[row][col] = "-"
+
     elif matrix[row][col] == "J":
         gambler_money += 100000
         matrix[row][col] = "G"

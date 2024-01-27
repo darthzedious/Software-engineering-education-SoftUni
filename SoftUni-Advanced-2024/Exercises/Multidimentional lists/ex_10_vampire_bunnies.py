@@ -30,6 +30,7 @@ for command in commands:  # Main loop for the actual game.
     for bp_row, cp_col in bunny_position:
         for bunny_move in directions.values():
             new_bp_row, new_bp_col = bp_row + bunny_move[0], cp_col + bunny_move[1]
+
             if 0 <= new_bp_row < rows and 0 <= new_bp_col < cols:
                 matrix[new_bp_row][new_bp_col] = "B"
 

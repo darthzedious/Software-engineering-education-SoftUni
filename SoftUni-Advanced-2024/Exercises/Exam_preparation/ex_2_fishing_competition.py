@@ -15,7 +15,7 @@ for row in range(size):
     for col in range(size):
 
         if matrix[row][col] == "S":
-            fisherman_pos = [row,col]
+            fisherman_pos = [row, col]
             matrix[row][col] = "-"
 
 
@@ -44,17 +44,18 @@ while command != "collect the nets":
     if c >= size:
         c = c - size
 
-    fisherman_pos = [r,c]
+    fisherman_pos = [r, c]
 
     if matrix[r][c].isdigit():
         collected_fish += int(matrix[r][c])
-        fisherman_pos = [r,c]
+        fisherman_pos = [r, c]
         matrix[r][c] = "-"
 
     elif matrix[r][c] == "W":
-        fisherman_pos = [r,c]
+        fisherman_pos = [r, c]
         print(f"You fell into a whirlpool! "
-              f"The ship sank and you lost the fish you caught. Last coordinates of the ship: [{fisherman_pos[0]},{fisherman_pos[1]}]")
+              f"The ship sank and you lost the fish you caught."
+              f" Last coordinates of the ship: [{fisherman_pos[0]},{fisherman_pos[1]}]")
         exit()
 
     command = input()
@@ -65,8 +66,10 @@ if collected_fish >= 20:
     print(f"Success! You managed to reach the quota!")
     print(f"Amount of fish caught: {collected_fish} tons.")
     [print(*row, sep="") for row in matrix]
+
 else:
     print(f"You didn't catch enough fish and didn't reach the quota! You need {20 - collected_fish} tons of fish more.")
+
     if collected_fish > 0:
         print(f"Amount of fish caught: {collected_fish} tons.")
     [print(*row, sep="") for row in matrix]
