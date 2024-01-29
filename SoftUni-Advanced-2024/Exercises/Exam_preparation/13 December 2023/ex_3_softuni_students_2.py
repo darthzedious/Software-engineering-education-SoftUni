@@ -26,6 +26,7 @@ def softuni_students(*args, **kwargs):
 
         for name in data:
             final_data.append(f"*** A student with the username {name} has successfully finished the course {id}!")
+
             if name in invalid_students:
                 invalid_students.remove(name)
 
