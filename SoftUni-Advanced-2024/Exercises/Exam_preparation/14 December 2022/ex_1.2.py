@@ -1,5 +1,6 @@
 from collections import deque
 
+
 def climb_peaks(food_portions, stamina):
     peaks = {"Vihren": 80, "Kutelo": 90, "Banski Suhodol": 100, "Polezhan": 60, "Kamenitza": 70}
     conquered_peaks = []
