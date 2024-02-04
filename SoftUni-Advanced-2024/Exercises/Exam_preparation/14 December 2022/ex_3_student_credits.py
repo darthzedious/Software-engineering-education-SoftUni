@@ -7,13 +7,13 @@ def students_credits(*args):
 
     for info in args:
         course_name, max_credits, max_test_points, diyan_points = info.split("-")
-        diyan_credits = float(max_credits) * (float(diyan_points) / float(max_test_points))
 
+        diyan_credits = float(max_credits) * (float(diyan_points) / float(max_test_points))
         diyan_data[course_name] = diyan_credits
 
     sorted_data = sorted(diyan_data.items(), key=lambda x: -x[1])
-
     total_credits = sum(diyan_data.values())
+
     for course_name, diyan_credits in sorted_data:
         result.append(f"{course_name} - {diyan_credits:.1f}\n")
 
