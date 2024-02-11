@@ -24,16 +24,16 @@ for command in commands:
     row = position[0] + directions[command][0]
     col = position[1] + directions[command][1]
 
-    if not (0 <= row < ROW and 0 <= col < COL):
-        if row >= ROW:
-            row = ROW - row
-        elif row < 0:
-            row = ROW + row
+    #if not (0 <= row < ROW and 0 <= col < COL):
+    if row >= ROW:
+        row = ROW - row
+    elif row < 0:
+        row = ROW + row
 
-        if col >= ROW:
-            col = ROW - col
-        elif col < 0:
-            col = ROW + col
+    if col >= ROW:
+        col = ROW - col
+    elif col < 0:
+        col = ROW + col
 
     position = [row, col]
 
