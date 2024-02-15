@@ -13,7 +13,6 @@ while elf_energy and number_of_materials:
 
     if elf < 5:
         number_of_materials.append(material)
-        elf_turn += 1
         continue
 
     if elf < material:
@@ -55,7 +54,7 @@ while elf_energy and number_of_materials:
             elf_turn += 1
             continue
 
-    if elf >= material :
+    if elf >= material:
         santa_bag += 1
         elf_turn += 1
         used_energy += material
