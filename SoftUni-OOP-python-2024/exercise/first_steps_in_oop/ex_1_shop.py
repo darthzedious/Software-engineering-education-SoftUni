@@ -9,5 +9,5 @@ class Shop:
 
 billa = Shop("Billa", ["apples", "bread"])
 
-print(billa.__dict__)
+print(billa.__dict__)  # this line converts the class into dictionary
 print(billa.get_items_count())
