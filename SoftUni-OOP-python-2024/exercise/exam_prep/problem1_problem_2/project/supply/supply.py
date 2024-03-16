@@ -8,8 +8,9 @@ class Supply(ABC):
         self.energy = energy
 
     @property
+    @abstractmethod
     def details(self):
-        return f"{self.__class__.__name__}: {self.name}, {self.energy}"
+        ...
 
     @property
     def name(self):
