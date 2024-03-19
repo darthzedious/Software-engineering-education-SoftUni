@@ -33,7 +33,7 @@ class Controller:
         else:
             return
 
-        for i in range(len(self.supplies)-1, -1,-1):
+        for i in range(len(self.supplies)-1, -1, -1):
             supply = self.supplies[i]
 
             if supply.__class__.__name__ == sustenance_name:
@@ -99,16 +99,9 @@ class Controller:
     def __str__(self):
         result = []
         for player in self.players:
-            result.append(f"Player: {player.name}, {player.age}, {player.stamina}, {player.need_sustenance}")
+            result.append(str(player))
 
         for supply in self.supplies:
-            result.append(f"{supply.__class__.__name__}: {supply.name}, {supply.energy}")
+            result.append(supply.details())
 
         return "\n".join(result)
-
-
-
-
-
-
-
