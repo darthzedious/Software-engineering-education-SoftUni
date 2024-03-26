@@ -33,7 +33,7 @@ class Computer(ABC):
 
     def configure_computer(self, processor: str, ram: int):
         #TODO
+        pass
 
     def __repr__(self):
         return f"{self.manufacturer} {self.model} with {self.processor} and {self.ram}GB RAM"
-    
