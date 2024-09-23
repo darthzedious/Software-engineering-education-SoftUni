@@ -7,19 +7,25 @@
 <body>
     {% include 'operations_menu.html' %}
 
-    <h1>Calculate Preferences Shares Price</h1>
+    <h1>{{ operation_name }}</h1>
 
     <form method="POST">
         {% csrf_token %}
-        <label for="div">Dividends</label><br>
-        Enter the dividend of the preference share:<br>
-        
-        <input type="number" step="any" name="div" required value="{{ div|default_if_none:'' }}" placeholder="Enter dividend"> <br><br>
-        
-        <label for="r">Rate of Return</label><br>
-        Enter the required rate of return (as a decimal, e.g., 0.08 for 8%):<br>
-        
-        <input type="number" step="any" name="r" required value="{{ r|default_if_none:'' }}" placeholder="Enter rate of return"> <br><br>
+        {% for field in input_fields %}
+            <label for="{{ field.name }}">{{ field.label }}</label>
+            <br>{{ field.description }}<br>
+            <input type="number" step="any" name="{{ field.name }}" required value="{{ field.value|default_if_none:'' }}" placeholder="{{ field.placeholder }}">
+            <br><br>
+        {% endfor %}
+{#        <label for="div">Dividends</label><br>#}
+{#        Enter the dividend of the preference share:<br>#}
+{#        #}
+{#        <input type="number" step="any" name="div" required value="{{ div|default_if_none:'' }}" placeholder="Enter dividend"> <br><br>#}
+{#        #}
+{#        <label for="r">Rate of Return</label><br>#}
+{#        Enter the required rate of return (as a decimal, e.g., 0.08 for 8%):<br>#}
+{#        #}
+{#        <input type="number" step="any" name="r" required value="{{ r|default_if_none:'' }}" placeholder="Enter rate of return"> <br><br>#}
         
         <button type="submit">Calculate</button>
         
@@ -31,7 +37,7 @@
     </a>
 
     {% if preferences_shares_price is not None %}
-        <h2>Preference Shares Price: {{ preferences_shares_price }}</h2>
+        <h2>{{ operation_name }}: {{ preferences_shares_price }}</h2>
     {% endif %}
 </body>
 </html>

@@ -24,8 +24,11 @@ def calculate_preferences_shares_price(request):
 
 
     context = {
-        'div': div,
-        'r': r,
+        'operation_name': 'Preferences Shares Price',
+        'input_fields': [
+            {'name': 'div', 'label': 'Dividends', 'description': 'Enter the dividend of the preference share:', 'value': div, 'placeholder': 'Enter dividend'},
+            {'name': 'r', 'label': 'Rate of return', 'description': 'Enter the required rate of return (as a decimal, e.g., 0.08 for 8%):', 'value': r, 'placeholder': 'Enter rate of return'}
+        ],
         'preferences_shares_price': preferences_shares_price,
 
     }
