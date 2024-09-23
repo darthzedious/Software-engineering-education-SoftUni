@@ -8,12 +8,7 @@
     <h1>Financial Calculator</h1>
     
 {#    to create separate html file with the menu so i can reuse it#}
-{#    {% include 'menu.html' %}#}
-        
-        <ul>
-            <li>
-                <a href="{% url 'preference_shares' %}">Option 1: Calculate Preference Shares Price</a>
-            </li>
-        </ul>
+    {% include 'operations_menu.html' %}
+
 </body>
 </html>

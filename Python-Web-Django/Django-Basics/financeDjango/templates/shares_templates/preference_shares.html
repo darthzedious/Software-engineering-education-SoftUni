@@ -5,6 +5,8 @@
     <title>Preference Shares Price</title>
 </head>
 <body>
+    {% include 'operations_menu.html' %}
+
     <h1>Calculate Preferences Shares Price</h1>
 
     <form method="POST">
@@ -20,7 +22,13 @@
         <input type="number" step="any" name="r" required value="{{ r|default_if_none:'' }}" placeholder="Enter rate of return"> <br><br>
         
         <button type="submit">Calculate</button>
+        
     </form>
+    
+    <br><br>
+    <a href="{% url 'home' %}">
+        <button type="button">Home Page</button>
+    </a>
 
     {% if preferences_shares_price is not None %}
         <h2>Preference Shares Price: {{ preferences_shares_price }}</h2>
