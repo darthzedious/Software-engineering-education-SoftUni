@@ -36,8 +36,8 @@
         <button type="button">Home Page</button>
     </a>
 
-    {% if preferences_shares_price is not None %}
-        <h2>{{ operation_name }}: {{ preferences_shares_price }}</h2>
+    {% if result is not None %}
+        <h2>{{ operation_name }}: {{ result }}</h2>
     {% endif %}
 </body>
 </html>
