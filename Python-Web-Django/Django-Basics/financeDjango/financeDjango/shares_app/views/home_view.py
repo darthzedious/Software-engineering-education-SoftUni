@@ -77,3 +77,12 @@ def calculate_ordinary_shares_price(request):
     }
 
     return render(request, 'shares_templates/calculate_shares_prices.html', context)
+
+
+def calculate_return_on_equity(request):
+
+    context = {
+
+    }
+
+    return render(request, 'shares_templates/calculate_shares_prices.html', context)
