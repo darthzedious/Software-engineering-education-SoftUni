@@ -81,8 +81,32 @@ def calculate_ordinary_shares_price(request):
 
 def calculate_return_on_equity(request):
 
-    context = {
+    net_profit = None
+    equity_capital = None
+    result = None
 
+    if request.method == 'POST':
+        try:
+            net_profit = float(request.POST.get('net_profit'))
+            equity_capital = float(request.POST.get('equity_capital'))
+
+            result =round(net_profit / equity_capital, 4)
+        except (ValueError, TypeError):
+            result = "Invalid input. Please enter a valid number."
+
+
+
+    context = {
+        'operation_name': 'Calculate Return on Equity',
+        'input_fields': [
+            {'name': 'net_profit', 'label': 'Net Profit',
+             'description': 'Enter the net profit of the company:', 'value': net_profit,
+             'placeholder': 'Enter expected net profit of the company:'},
+            {'name': 'equity_capital', 'label': 'Equity Capital',
+             'description': 'Enter the equity capital of the company:',
+             'value': equity_capital, 'placeholder': 'Enter equity capital of the company:'},
+        ],
+        'result': result,
     }
 
     return render(request, 'shares_templates/calculate_shares_prices.html', context)
