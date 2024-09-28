@@ -29,6 +29,12 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+MY_APPS=[
+    'petstagram.accounts',
+    'petstagram.common',
+    'petstagram.pets',
+    'petstagram.photos',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -37,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+] + MY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -74,10 +80,21 @@ WSGI_APPLICATION = 'petstagram.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "petstagram_db",
+        "USER": "postgres",
+        "PASSWORD": "a1999l",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
 }
 
@@ -118,7 +135,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
