@@ -6,8 +6,10 @@ from django.shortcuts import render
 # Create your views here.
 
 def home(request):
-    return render(request, 'shares_templates/home.html')
+    return render(request, 'home_menu/home.html')
 
+def stock_operations_menu(request):
+    return render(request, 'home_menu/stock_shares_operation_menu.html')
 
 def calculate_preferences_shares_price(request):
     result = None
