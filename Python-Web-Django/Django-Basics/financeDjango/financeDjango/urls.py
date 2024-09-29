@@ -21,5 +21,6 @@ from financeDjango import shares_app
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('financeDjango.shares_app.urls'))
+    path('', include('financeDjango.home_menu_app.urls')),
+    path('shares/', include('financeDjango.shares_app.urls')),
 ]

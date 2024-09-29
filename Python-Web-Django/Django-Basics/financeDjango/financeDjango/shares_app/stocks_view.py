@@ -2,15 +2,6 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render
 
 
-
-# Create your views here.
-
-def home(request):
-    return render(request, 'home_menu/home.html')
-
-def stock_operations_menu(request):
-    return render(request, 'home_menu/stock_shares_operation_menu.html')
-
 def calculate_preferences_shares_price(request):
     result = None
     div = None
@@ -112,3 +103,5 @@ def calculate_return_on_equity(request):
     }
 
     return render(request, 'shares_templates/calculate_shares_prices.html', context)
+
+

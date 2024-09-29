@@ -5,7 +5,7 @@
     <title>Preference Shares Price</title>
 </head>
 <body>
-    {% include 'home_menu/stock_shares_operation_menu.html' %}
+    {% include 'home_menu/operations_menu.html' %}
 
     <h1>{{ operation_name }}</h1>
 
@@ -39,5 +39,7 @@
     {% if result is not None %}
         <h2>{{ operation_name }}: {{ result }}</h2>
     {% endif %}
+    
+    <p>May add  text information, formula and variables explanation....</p>
 </body>
 </html>

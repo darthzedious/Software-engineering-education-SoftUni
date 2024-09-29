@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'financeDjango.shares_app.apps.SharesAppConfig',
-    'financeDjango.home_menu.apps.HomeMenuConfig'
+    'financeDjango.home_menu_app.apps.HomeMenuConfig'
 ]
 
 MIDDLEWARE = [
