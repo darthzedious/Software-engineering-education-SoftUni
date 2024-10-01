@@ -1,7 +1,5 @@
 import os
-
 import numpy as np
-from django.core.exceptions import ValidationError
 from django.shortcuts import render
 import requests
 from financeDjango.shares_app.helpers import fetch_stock_price, fetch_historical_data
@@ -281,15 +279,46 @@ def calculate_beta_coefficient(request):
 
 def calculate_capm(request):
     """
-                Calculate the expected return of an asset using the Capital Asset Pricing Model (CAPM).
+            Calculate the expected return of an asset using the Capital Asset Pricing Model (CAPM).
 
-                Args:
-                    rf (float): Risk-free rate (e.g., 0.03 for 3%).
+            Args:
+                rf (float): Risk-free rate (e.g., 0.03 for 3%).
                     beta (float): Beta of the asset (e.g., 1.2).
                     rm (float): Expected market return (e.g., 0.08 for 8%).
 
                 Returns:
                     float: Expected return of the asset.
                 """
-    #may use the first template
-    pass
+    result = None
+    rf = None
+    rm = None
+    beta = None
+
+    if request.method == 'POST':
+        try:
+            rf = float(request.POST.get('rf'))
+            rm = float(request.POST.get('rm'))
+            beta = float(request.POST.get('beta'))
+
+            result = rf + beta * (rm - rf)
+        except (ValueError, TypeError):
+            result = "Invalid input. Please enter a valid number."
+
+    context = {
+        'operation_name': 'Capital Asset Pricing Model (CAPM)',
+        'input_fields': [
+            {'name': 'rf', 'label': 'Risk-free rate', 'description': 'Risk-free rate (e.g., 0.03 for 3%):',
+             'value': rf, 'placeholder': 'Enter Risk-free rate'},
+            {'name': 'rm', 'label': 'Expected market return',
+             'description': 'Expected market return (e.g., 0.08 for 8%):', 'value': rm,
+             'placeholder': 'Enter expected market return'},
+            {'name': 'beta', 'label': 'Beta coefficient of the asset',
+             'description': 'Beta of the asset (e.g., 1.2):', 'value': beta,
+             'placeholder': 'Beta coefficient of the asset'},
+
+        ],
+        'result': result,
+
+    }
+
+    return render(request, 'shares_templates/calculate_shares_prices.html', context=context)

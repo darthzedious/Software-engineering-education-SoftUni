@@ -6,6 +6,7 @@
     <title>Calculate Beta Coefficient</title>
 </head>
 <body>
+    {% include 'home_menu/operations_menu.html' %}
     <h1>Calculate Beta Coefficient</h1>
 
     <form method="GET" action="{% url 'calculate_beta' %}">
@@ -21,5 +22,10 @@
     {% if beta is not None %}
         <h2>Beta for {{ symbol }}: {{ beta }}</h2>
     {% endif %}
+    
+   <br><br>
+    <a href="{% url 'home' %}">
+        <button type="button">Home Page</button>
+    </a>
 </body>
 </html>

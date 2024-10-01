@@ -5,7 +5,7 @@ from financeDjango.shares_app.stocks_view import (calculate_preferences_shares_p
                                                   calculate_ordinary_shares_price, calculate_return_on_equity,
                                                   calculate_growth_rate_of_dividends,
                                                   get_fundamental_stock_data, get_live_stock_price,
-                                                  get_top_10_stock_prices, calculate_beta_coefficient)
+                                                  get_top_10_stock_prices, calculate_beta_coefficient,calculate_capm)
 
 urlpatterns = [
     path('preference-shares/', calculate_preferences_shares_price, name='preference_shares'),
@@ -16,5 +16,6 @@ urlpatterns = [
     path('live-stock-price/', get_live_stock_price, name='stock_price'),
     path('top-10-stocks/', get_top_10_stock_prices, name='top_10_stocks'),
     path('calculate-beta', calculate_beta_coefficient, name='calculate_beta'),
+    path('calculate_capm/', calculate_capm, name='calculate_capm'),
 
 ]
