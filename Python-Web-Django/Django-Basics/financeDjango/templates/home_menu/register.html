@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Register</title>
 </head>
-    {% include 'home_menu/operations_menu.html' %}
+    {% include 'home_menu/operations_menu.html'%}
+    
+
 <body>
     <h1>Finance Calculator</h1>
 
@@ -16,13 +18,12 @@
     </ul>
     {% endif %}
 
-    <form method="POST">
+    <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Log In</button>
+        {{ form.as_p }}  <!-- Render form fields with <p> tags -->
+        <button type="submit">Sign Up</button>
     </form>
-        <a href="{% url 'register' %}">
-        <button type="submit">Register</button>
-        </a>
+
+
 </body>
 </html>

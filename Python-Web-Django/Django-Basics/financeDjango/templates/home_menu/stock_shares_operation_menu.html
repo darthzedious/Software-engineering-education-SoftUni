@@ -5,6 +5,8 @@
     <title>Menu</title>
 </head>
 <body>
+    {% include 'home_menu/operations_menu.html'%}
+    
     <ul>
             <li>
                 <a href="{% url 'preference_shares' %}">Option 1: Calculate Preference Shares Price</a>
@@ -38,11 +40,6 @@
         </ul>
     
     <p>May add information about shares...</p>
-
-   <br><br>
-    <a href="{% url 'home' %}">
-        <button type="button">Home Page</button>
-    </a> 
 
 </body>
 </html>
