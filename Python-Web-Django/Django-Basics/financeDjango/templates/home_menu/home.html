@@ -11,10 +11,12 @@
     <a href="{% url 'register' %}">
         <button type="submit">Register</button>
     </a>
+    
+    {#    to create separate html file with the menu so i can reuse it#}
+    {% include 'home_menu/operations_menu.html'%}
+    
     <h1>Financial Calculator</h1>
     
-{#    to create separate html file with the menu so i can reuse it#}
-    {% include 'home_menu/operations_menu.html'%}
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
         magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.</p>
