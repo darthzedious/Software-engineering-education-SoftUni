@@ -7,7 +7,7 @@ class RegisterForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = "__all__"
+        fields = '__all__'
 
 
 class LoginForm(forms.Form):

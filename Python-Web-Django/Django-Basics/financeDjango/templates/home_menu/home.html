@@ -5,21 +5,27 @@
     <title>Home Page</title>
 </head>
 <body>
-    <a href="{% url 'login' %}">
-        <button type="submit">Log in</button>
-    </a>
-    <a href="{% url 'register' %}">
-        <button type="submit">Register</button>
-    </a>
+    {% if user.is_authenticated %}
+        <p>Hello, {{ user.username }}!</p>
+        <a href="{% url 'logout' %}">
+            <button type="button">Log out</button>
+        </a>
+    {% else %}
+        <a href="{% url 'login' %}">
+            <button type="submit">Log in</button>
+        </a>
+        <a href="{% url 'register' %}">
+            <button type="submit">Register</button>
+        </a>
+    {% endif %}
     
-    {#    to create separate html file with the menu so i can reuse it#}
-    {% include 'home_menu/operations_menu.html'%}
+    {% include 'home_menu/operations_menu.html' %}
     
     <h1>Financial Calculator</h1>
     
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
         magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.</p>
-    <p>Introduction and key information about the app </p>
+    <p>Introduction and key information about the app.</p>
 </body>
 </html>
