@@ -1,4 +1,4 @@
-from datetime import datetime
+
 from django.shortcuts import render, redirect
 
 from forumApp.posts.forms import SearchForm, PostCreateForm, PostDeleteForm

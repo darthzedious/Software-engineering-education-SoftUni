@@ -5,6 +5,12 @@
     <title>Home Page</title>
 </head>
 <body>
+    <a href="{% url 'login' %}">
+        <button type="submit">Log in</button>
+    </a>
+    <a href="{% url 'register' %}">
+        <button type="submit">Register</button>
+    </a>
     <h1>Financial Calculator</h1>
     
 {#    to create separate html file with the menu so i can reuse it#}

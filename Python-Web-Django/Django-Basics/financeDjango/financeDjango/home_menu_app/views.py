@@ -6,3 +6,9 @@ def home_view(request):
 
 def stock_operations_menu(request):
     return render(request, 'home_menu/stock_shares_operation_menu.html')
+
+def log_in_view(request):
+    return render()
+
+def register_view(request):
+    pass
