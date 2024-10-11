@@ -1,10 +1,16 @@
 from django.db import models
 
 # Create your models here.
-from petstagram.photos.models import Photos
+from petstagram.photos.models import Photo
 
 
 class Comment(models.Model):
+    class Meta:
+        indexes = [
+            models.Index(fields=['date_time_of_publication']),
+        ]
+        ordering = ['-date_time_of_publication']
+
     text = models.TextField(
         max_length=300,
     )
@@ -14,13 +20,13 @@ class Comment(models.Model):
     )
 
     to_photo = models.ForeignKey(
-        to=Photos,
+        to=Photo,
         on_delete=models.CASCADE,
     )
 
 
 class Like(models.Model):
     to_photo = models.ForeignKey(
-        to=Photos,
+        to=Photo,
         on_delete=models.CASCADE,
     )

@@ -1,9 +1,9 @@
 # Register your models here.
 from django.contrib import admin
-from petstagram.photos.models import Photos
+from petstagram.photos.models import Photo
 
 
-@admin.register(Photos)
+@admin.register(Photo)
 class PhotoAdmin(admin.ModelAdmin):
     list_display = ('id', 'date_of_publication', 'description', 'get_added_pets')
 
