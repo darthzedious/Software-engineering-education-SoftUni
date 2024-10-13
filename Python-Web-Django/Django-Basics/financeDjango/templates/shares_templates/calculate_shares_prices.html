@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Preference Shares Price</title>
-</head>
-<body>
-    {% include 'home_menu/operations_menu.html' %}
+{% extends 'home_menu/home.html' %}
 
-    <h1>{{ operation_name }}</h1>
+
+{% block content %}
+
+    <h3>{{ operation_name }}</h3>
 
     <form method="POST">
         {% csrf_token %}
@@ -28,7 +24,6 @@
 {#        <input type="number" step="any" name="r" required value="{{ r|default_if_none:'' }}" placeholder="Enter rate of return"> <br><br>#}
         
         <button type="submit">Calculate</button>
-        
     </form>
     
     <br><br>
@@ -41,5 +36,5 @@
     {% endif %}
     
     <p>May add  text information, formula and variables explanation....</p>
-</body>
-</html>
+
+{% endblock %}

@@ -1,45 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Menu</title>
-</head>
-<body>
-    {% include 'home_menu/operations_menu.html'%}
-    
-    <ul>
-            <li>
-                <a href="{% url 'preference_shares' %}">Option 1: Calculate Preference Shares Price</a>
-            </li>
-            
-            <li>
-                <a href="{% url 'ordinary_shares' %}">Option 2: Calculate Ordinary Shares Price</a>
-            </li>
-        
-            <li>
-                <a href="{% url 'return_on_equity' %}">Option 3: Calculate Return on Equity</a>
-            </li>
-            <li>
-                <a href="{% url 'growth_rate' %}">Option 4: Calculate Dividend Growth Rate</a>
-            </li>
-            <li>
-                <a href="{% url 'stock_data' %}">Option 5: Search live stock data</a>
-            </li>
-            <li>
-                <a href="{% url 'stock_price' %}">Option 6:Search live stock prices</a>
-            </li>
-            <li>
-                <a href="{% url 'top_10_stocks' %}">Option 7: Search top 10 stocks</a>
-            </li>
-        <li>
-            <a href="{% url 'calculate_beta' %}">Option 7: Calculate beta coefficient</a>
-        </li>
-        <li>
-            <a href="{% url 'calculate_capm' %}">Option 8: Calculate Capital Asset Pricing Model (CAPM)</a>
-        </li>
-        </ul>
-    
-    <p>May add information about shares...</p>
 
-</body>
-</html>
+<ol>
+        <li>
+            <a class="dropdown-item" href="{% url 'preference_shares' %}">Calculate Preference Shares Price</a>
+        </li>
+        
+        <li>
+            <a class="dropdown-item" href="{% url 'ordinary_shares' %}">Calculate Ordinary Shares Price</a>
+        </li>
+    
+        <li>
+            <a class="dropdown-item" href="{% url 'return_on_equity' %}">Calculate Return on Equity</a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="{% url 'growth_rate' %}">Calculate Dividend Growth Rate</a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="{% url 'stock_data' %}">Search live stock data</a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="{% url 'stock_price' %}">Search live stock prices</a>
+        </li>
+        <li>
+            <a class="dropdown-item"  href="{% url 'top_10_stocks' %}"> Search top 10 stocks</a>
+        </li>
+    <li>
+        <a class="dropdown-item" href="{% url 'calculate_beta' %}">Calculate beta coefficient</a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="{% url 'calculate_capm' %}">Calculate Capital Asset Pricing Model (CAPM)</a>
+    </li>
+</ol>
+

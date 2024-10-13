@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Register</title>
-</head>
-    {% include 'home_menu/operations_menu.html'%}
-    
+{% extends 'home_menu/home.html' %}
 
-<body>
-    <h1>Finance Calculator</h1>
-
+{% block content %}
     {% if messages %}
     <ul>
         {% for message in messages %}
@@ -24,6 +15,4 @@
         <button type="submit">Sign Up</button>
     </form>
 
-
-</body>
-</html>
+{% endblock %}

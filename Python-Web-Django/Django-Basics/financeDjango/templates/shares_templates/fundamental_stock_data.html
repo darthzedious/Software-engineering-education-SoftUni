@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fundamental Stock Data</title>
-</head>
-<body>
-{% include 'home_menu/operations_menu.html' %}
-    <h1>Fundamental Stock Data</h1>
+{% extends 'home_menu/home.html' %}
+
+{% block content %}
+    <h3>Fundamental Stock Data</h3>
 
     <form method="GET" action="{% url 'stock_data' %}">
         <label for="symbol">Enter Stock Symbol:</label>
@@ -37,8 +31,8 @@
         <button type="button">Home Page</button>
     </a>
 
-</body>
-</html>
+{% endblock %}
+
 {#<!DOCTYPE html>#}
 {#<html lang="en">#}
 {#<head>#}

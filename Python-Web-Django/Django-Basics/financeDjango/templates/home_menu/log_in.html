@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-    {% include 'home_menu/operations_menu.html' %}
-<body>
-    <h1>Finance Calculator</h1>
+{% extends 'home_menu/home.html' %}
 
+{% block content %}
     {% if messages %}
     <ul>
         {% for message in messages %}
@@ -24,5 +17,4 @@
         <a href="{% url 'register' %}">
         <button type="submit">Register</button>
         </a>
-</body>
-</html>
+{% endblock %}

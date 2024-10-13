@@ -1,23 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Authentication</title>
-</head>
-<body>
-    {% if user.is_authenticated %}
-        <p>Hello, {{ user.username }}</p>
-        <a href="{% url 'logout' %}">
-        <button type="submit" >Log out</button>
-        </a>
-    {% else  %}
-            <a href="{% url 'login' %}">
-            <button type="submit">Log in</button>
-        </a>
-        <a href="{% url 'register' %}">
-            <button type="submit">Register</button>
-        </a>
-    {% endif %}
-
-</body>
-</html>
+ <div class="d-flex align-items-center ms-auto">
+        {% if user.is_authenticated %}
+            
+          <p class="me-3 mb-0 text-light">Hello, {{ user.username }}!</p>
+          <a href="{% url 'logout' %}" class="btn btn-danger me-2">
+              Log out
+          </a>
+            
+        {% else %}
+            <a href="{% url 'login' %}" class="btn btn-primary me-2">
+                Log in
+            </a>
+            <a href="{% url 'register' %}" class="btn btn-secondary me-2">
+                Register
+            </a>
+        {% endif %}
+</div>
