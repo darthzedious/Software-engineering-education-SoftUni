@@ -1,78 +1,66 @@
 import os
+from lib2to3.fixes.fix_input import context
+
 import numpy as np
 from django.shortcuts import render
 import requests
+
+from financeDjango.shares_app.forms import PreferencesSharesForm, OrdinarySharesPrice
 from financeDjango.shares_app.helpers import fetch_stock_price, fetch_historical_data
 
 
 def calculate_preferences_shares_price(request):
     result = None
-    div = None
-    r = None
 
     if request.method == 'POST':
-        try:
-            div = float(request.POST.get('div'))
-            r = float(request.POST.get('r'))
+        form = PreferencesSharesForm(request.POST)
+        if form.is_valid():
+            dividends = form.cleaned_data['dividends']
+            rate_of_return = form.cleaned_data['rate_of_return']
 
-            result = div / r
-
-        except (ValueError, TypeError):
-            result = "Invalid input. Please enter a valid number."
-
+            try:
+                result = dividends / rate_of_return
+            except (ValueError, ZeroDivisionError):
+                result = "Invalid input. Please enter a valid number."
+    else:
+        form = PreferencesSharesForm()
 
     context = {
-        'operation_name': 'Preferences Shares Price',
-        'input_fields': [
-            {'name': 'div', 'label': 'Dividends', 'description': 'Enter the dividend of the preference share:', 'value': div, 'placeholder': 'Enter dividend'},
-            {'name': 'r', 'label': 'Rate of return', 'description': 'Enter the required rate of return (as a decimal, e.g., 0.08 for 8%):', 'value': r, 'placeholder': 'Enter rate of return'}
-        ],
+        'operation_name': 'Preference Shares Price',
+        'form': form,
         'result': result,
-
     }
 
-    return render(request, 'shares_templates/calculate_shares_prices.html', context)
+
+    return render(request, 'shares_templates/calculations.html', context)
 
 def calculate_ordinary_shares_price(request):
     result = None
-    error_message = None
-    d1 = None
-    r = None
-    g = None
 
-    # Check if the request is a POST request
-    if request.method == 'POST':  # Fix typo here
-        try:
-            # Get the inputs from the form
-            d1 = float(request.POST.get('d1'))
-            r = float(request.POST.get('r'))
-            g = float(request.POST.get('g'))
+    if request.method == "POST":
+        form = OrdinarySharesPrice(request.POST)
+        if form.is_valid():
+            d = form.cleaned_data['dividends']
+            r = form.cleaned_data['rate_of_return']
+            g = form.cleaned_data['growth_rate']
 
-            # Validate: r must be greater than g
-            if r <= g:
-                raise ValueError("The required rate of return must be greater than the growth rate.")
+            try:
+                if r <= g:
+                    raise ValueError("The required rate of return must be greater than the growth rate.")
+                result = round(d / (r - g), 2)
 
-            # Perform the calculation: Price = d1 / (r - g)
-            result = round(d1 / (r - g), 2)
+            except (ValueError, TypeError):
+                result = "Invalid input. Please enter a valid number."
+    else:
+        form = OrdinarySharesPrice()
 
-        except (ValueError, TypeError) as e:
-            # Handle invalid input or calculation errors
-            result = "Invalid input. Please enter a valid number."
-            # error_message = str(e)
-
-    # Prepare the context for rendering
     context = {
-        'operation_name': 'Calculate Ordinary Shares Price',
-        'input_fields': [
-            {'name': 'd1', 'label': 'Expected Dividend', 'description': 'Enter the expected dividend in the next period:', 'value': d1, 'placeholder': 'Enter expected dividend'},
-            {'name': 'r', 'label': 'Rate of Return', 'description': 'Enter the required rate of return (as a decimal, e.g., 0.08 for 8%;The required rate of return must be greater than the growth rate.):', 'value': r, 'placeholder': 'Enter rate of return'},
-            {'name': 'g', 'label': 'Growth Rate', 'description': 'Enter the growth rate of dividends (as a decimal, e.g., 0.02 for 2%):', 'value': g, 'placeholder': 'Enter growth rate'},
-        ],
+        'operation_name': 'Ordinary Shares Price',
+        'form': form,
         'result': result,
-        'error_message': error_message
     }
 
-    return render(request, 'shares_templates/calculate_shares_prices.html', context)
+    return render(request, 'shares_templates/calculations.html', context)
 
 
 def calculate_return_on_equity(request):

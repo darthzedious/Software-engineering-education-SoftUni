@@ -1,0 +1,43 @@
+{% extends 'home_menu/home.html' %}
+
+
+{% block content %}
+
+
+
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+    <div class="row">
+       <div class="col-md-11 ms-5"> <!-- Use col-md-8 for centering and mx-auto for auto margins -->
+            <h3 class="text-center">{{ operation_name }}</h3>
+            <br><br>
+            
+            <form method="POST" class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="mb-4">
+                    {{ form.as_p }}
+                </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Calculate</button>
+                </div>
+            </form>
+
+            <br>
+        
+            {% if result is not None %}
+                <div class="alert alert-success mt-3">
+                    <h2>{{ operation_name }}: {{ result }}</h2>
+                </div>
+            {% endif %}
+        
+        </div>
+    </div>
+</div>
+
+
+
+    <p>May add  text information, formula and variables explanation....</p>
+
+{% endblock %}
