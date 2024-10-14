@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('financeDjango.home_menu_app.urls')),
     path('shares/', include('financeDjango.shares_app.urls')),
+    path('accounts/', include('financeDjango.accounts.urls')),
 ]

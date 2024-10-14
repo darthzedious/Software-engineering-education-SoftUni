@@ -1,7 +1,9 @@
  <div class="d-flex align-items-center ms-auto">
         {% if user.is_authenticated %}
             
-          <p class="me-3 mb-0 text-light">Hello, {{ user.username }}!</p>
+{# <a class="me-3 mb-0 text-light" href="{% url "profile"%}">Hello, {{user.username }}!</a>#}
+            
+            <p class="me-3 mb-0 text-light">Hello, {{user.username }}!</p>
           <a href="{% url 'logout' %}" class="btn btn-danger me-2">
               Log out
           </a>

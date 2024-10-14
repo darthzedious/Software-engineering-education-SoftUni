@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap4",
     'financeDjango.shares_app.apps.SharesAppConfig',
-    'financeDjango.home_menu_app.apps.HomeMenuConfig'
+    'financeDjango.home_menu_app.apps.HomeMenuConfig',
+    'financeDjango.accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
