@@ -1,11 +1,10 @@
 import os
-from lib2to3.fixes.fix_input import context
-
 import numpy as np
 from django.shortcuts import render
 import requests
 
-from financeDjango.shares_app.forms import PreferencesSharesForm, OrdinarySharesPrice
+from financeDjango.shares_app.forms import PreferencesSharesForm, OrdinarySharesPrice, ReturnOnEquityForm, \
+    GrowthRateOfDividendsForm
 from financeDjango.shares_app.helpers import fetch_stock_price, fetch_historical_data
 
 
@@ -64,36 +63,37 @@ def calculate_ordinary_shares_price(request):
 
 
 def calculate_return_on_equity(request):
-
-    net_profit = None
-    equity_capital = None
     result = None
 
-    if request.method == 'POST':
-        try:
-            net_profit = float(request.POST.get('net_profit'))
-            equity_capital = float(request.POST.get('equity_capital'))
+    if request.method =="POST":
+        form = ReturnOnEquityForm(request.POST)
+        if form.is_valid():
+            net_profit = form.cleaned_data['net_profit']
+            equity_capital = form.cleaned_data['equity_capital']
 
-            result =round(net_profit / equity_capital, 4)
-        except (ValueError, TypeError):
-            result = "Invalid input. Please enter a valid number."
+            try:
+                result =round(net_profit / equity_capital, 4)
+            except (ValueError, TypeError):
+                result = "Invalid input. Please enter a valid number."
+    else:
+        form = ReturnOnEquityForm()
 
-
+    # if request.method == 'POST':
+    #     try:
+    #         net_profit = float(request.POST.get('net_profit'))
+    #         equity_capital = float(request.POST.get('equity_capital'))
+    #
+    #         result =round(net_profit / equity_capital, 4)
+    #     except (ValueError, TypeError):
+    #         result = "Invalid input. Please enter a valid number."
 
     context = {
         'operation_name': 'Calculate Return on Equity',
-        'input_fields': [
-            {'name': 'net_profit', 'label': 'Net Profit',
-             'description': 'Enter the net profit of the company:', 'value': net_profit,
-             'placeholder': 'Enter expected net profit of the company:'},
-            {'name': 'equity_capital', 'label': 'Equity Capital',
-             'description': 'Enter the equity capital of the company:',
-             'value': equity_capital, 'placeholder': 'Enter equity capital of the company:'},
-        ],
+        'form': form,
         'result': result,
     }
 
-    return render(request, 'shares_templates/calculate_shares_prices.html', context)
+    return render(request, 'shares_templates/calculations.html', context)
 
 
 def calculate_growth_rate_of_dividends(request):
@@ -102,41 +102,33 @@ def calculate_growth_rate_of_dividends(request):
     The complement, 1 − ki, represents the Payout Ratio,
      or the portion of net income paid to shareholders as dividends."""
 
-    net_profit = None
-    equity_capital = None
-    ki = None
+
     result = None
-    # roe = None
 
     if request.method == 'POST':
-        try:
-            net_profit = float(request.POST.get('net_profit'))
-            equity_capital = float(request.POST.get('equity_capital'))
-            ki = float(request.POST.get('ki'))
-            roe = round(net_profit / equity_capital, 4)
+        form = GrowthRateOfDividendsForm(request.POST)
+        if form.is_valid():
+            net_profit = form.cleaned_data['net_profit']
+            equity_capital = form.cleaned_data['equity_capital']
+            ki = form.cleaned_data['retention_ratio']
+            try:
+                roe = round(net_profit / equity_capital, 4)
 
-            result = round(roe * (1 - ki), 4)
+                result = round(roe * (1 - ki), 4)
 
-        except (ValueError, TypeError):
-            result = "Invalid input. Please enter a valid number."
+            except (ValueError, TypeError):
+                result = "Invalid input. Please enter a valid number."
+    else:
+        form = GrowthRateOfDividendsForm()
 
 
     context ={
         'operation_name': 'Calculate Growth Rate of Dividends',
-        'input_fields': [
-            {'name': 'net_profit', 'label': 'Net Profit',
-             'description': 'Enter the net profit of the company:', 'value': net_profit,
-             'placeholder': 'Enter expected net profit of the company:'},
-            {'name': 'equity_capital', 'label': 'Equity Capital',
-             'description': 'Enter the equity capital of the company:',
-             'value': equity_capital, 'placeholder': 'Enter equity capital of the company:'},
-            {'name': 'ki', 'label': 'Ki',
-             'description': 'Enter the Retention Ratio (Ki) of the company:', 'value': ki, 'placeholder': 'Enter "Ki" of the company:'},
-        ],
+        'form': form,
         'result': result,
     }
 
-    return render(request, 'shares_templates/calculate_shares_prices.html', context)
+    return render(request, 'shares_templates/calculations.html', context)
 
 
 
