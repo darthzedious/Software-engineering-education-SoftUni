@@ -1,0 +1,9 @@
+.form-container {
+        min-height: 400px; /* Adjust as per your form height */
+        position: relative;
+    }
+
+    /* Prevent jumpiness by keeping everything centered and smooth */
+html {
+    scroll-behavior: smooth;
+}

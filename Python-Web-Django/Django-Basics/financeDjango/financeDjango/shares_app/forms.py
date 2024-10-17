@@ -6,7 +6,7 @@ class BaseSharesForm(forms.Form):
         label='',
         widget=forms.NumberInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Enter Dividends',
+            'placeholder': 'Dividends',
         }),
         help_text='Enter the dividend of the preference share.',
     )
@@ -39,7 +39,7 @@ class BaseROEGrowthRateForm(forms.Form):
             'class': 'form-control',
             'placeholder': 'Equity capital ',
         }),
-        help_text='Enter the equity capital of the company'
+        help_text='Enter the equity capital of the company',
     )
 
 
@@ -53,7 +53,7 @@ class OrdinarySharesPrice(BaseSharesForm):
         label='',
         widget=forms.NumberInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Enter growth rate',
+            'placeholder': 'Growth rate',
         }),
         help_text='Enter the growth rate of dividends (as a decimal, e.g., 0.02 for 2%)',
     )
@@ -61,7 +61,7 @@ class OrdinarySharesPrice(BaseSharesForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['dividends'].widget.attrs['placeholder'] = 'Enter expected dividend'
+        self.fields['dividends'].widget.attrs['placeholder'] = 'Expected dividend'
         self.fields['dividends'].help_text = 'Enter the expected dividend for the next period'
         self.fields['rate_of_return'].help_text = ('Enter the required rate of return (as a decimal, e.g., 0.08 for 8%;<br>'
                                                    'The required rate of return must be greater than the growth rate.)')
@@ -77,10 +77,38 @@ class GrowthRateOfDividendsForm(BaseROEGrowthRateForm):
         label='',
         widget=forms.NumberInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Enter retention ratio',
+            'placeholder': 'Retention ratio',
         }),
-        help_text='Enter the Retention Ratio (Ki) of the company'
+        help_text='Enter the Retention Ratio (Ki) of the company',
     )
 
 class CAPMForm(forms.Form):
-    pass
+    risk_free_rate = forms.DecimalField(
+        required=True,
+        label = '',
+        widget=forms.NumberInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Risk-free rate (e.g., 0.03 for 3%)',
+        }),
+        help_text='Enter the Risk-free rate of the company',
+    )
+
+    market_return = forms.DecimalField(
+        required=True,
+        label='',
+        widget=forms.NumberInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Market return (e.g., 0.08 for 8%)',
+        }),
+        help_text='Enter the market return of the company',
+    )
+
+    beta_coefficient = forms.DecimalField(
+        required=True,
+        label ='',
+        widget=forms.NumberInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Beta coefficient (e.g., 1.2)',
+        }),
+        help_text='Enter the beta coefficient of the company',
+    )

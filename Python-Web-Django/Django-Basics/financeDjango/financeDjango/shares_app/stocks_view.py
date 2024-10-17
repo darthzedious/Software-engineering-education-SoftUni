@@ -2,36 +2,61 @@ import os
 import numpy as np
 from django.shortcuts import render
 import requests
+from django.urls import reverse_lazy
+from django.views.generic import FormView
 
 from financeDjango.shares_app.forms import PreferencesSharesForm, OrdinarySharesPrice, ReturnOnEquityForm, \
-    GrowthRateOfDividendsForm
+    GrowthRateOfDividendsForm, CAPMForm
 from financeDjango.shares_app.helpers import fetch_stock_price, fetch_historical_data
 
 
-def calculate_preferences_shares_price(request):
-    result = None
+# def calculate_preferences_shares_price(request):
+#     result = None
+# 
+#     if request.method == 'POST':
+#         form = PreferencesSharesForm(request.POST)
+#         if form.is_valid():
+#             dividends = form.cleaned_data['dividends']
+#             rate_of_return = form.cleaned_data['rate_of_return']
+#
+#             try:
+#                 result = dividends / rate_of_return
+#             except (ValueError, ZeroDivisionError):
+#                 result = "Invalid input. Please enter a valid number."
+#     else:
+#         form = PreferencesSharesForm()
+#
+#     context = {
+#         'operation_name': 'Preference Shares Price',
+#         'form': form,
+#         'result': result,
+#     }
+#
+#
+#     return render(request, 'shares_templates/calculations.html', context)
 
-    if request.method == 'POST':
-        form = PreferencesSharesForm(request.POST)
-        if form.is_valid():
-            dividends = form.cleaned_data['dividends']
-            rate_of_return = form.cleaned_data['rate_of_return']
+class PreferenceSharesPrice(FormView):
+    template_name = 'shares_templates/calculations.html'
+    form_class = PreferencesSharesForm
+    success_url = reverse_lazy('preference_shares')
 
-            try:
-                result = dividends / rate_of_return
-            except (ValueError, ZeroDivisionError):
-                result = "Invalid input. Please enter a valid number."
-    else:
-        form = PreferencesSharesForm()
+    def form_valid(self, form):
+        dividends = form.cleaned_data['dividends']
+        rate_of_return = form.cleaned_data['rate_of_return']
+        try:
+            result = dividends / rate_of_return
+        except (ValueError, ZeroDivisionError):
+            result = "Invalid input. Please enter a valid number."
 
-    context = {
-        'operation_name': 'Preference Shares Price',
-        'form': form,
-        'result': result,
-    }
+        context = self.get_context_data(result=result, form=form)
+        return self.render_to_response(context)
 
+    def get_context_data(selfself, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['operation_name'] = 'Preference Shares Price'
 
-    return render(request, 'shares_templates/calculations.html', context)
+        return context
+
 
 def calculate_ordinary_shares_price(request):
     result = None
@@ -257,48 +282,53 @@ def calculate_beta_coefficient(request):
     return render(request, 'shares_templates/calculate_beta.html', context)
 
 
-def calculate_capm(request):
-    """
-            Calculate the expected return of an asset using the Capital Asset Pricing Model (CAPM).
+# def calculate_capm(request):
+#     result = None
+#
+#     if request.method == 'POST':
+#         form = CAPMForm(request.POST)
+#         if form.is_valid():
+#
+#             rf = form.cleaned_data['risk_free_rate']
+#             rm = form.cleaned_data['market_return']
+#             beta = form.cleaned_data['beta_coefficient']
+#
+#             try:
+#                 result = rf + beta * (rm - rf)
+#             except (ValueError, TypeError):
+#                 result = "Invalid input. Please enter a valid number."
+#     else:
+#         form = CAPMForm()
+#
+#     context = {
+#         'operation_name': 'Capital Asset Pricing Model (CAPM)',
+#         'form': form,
+#         'result': result,
+#
+#     }
+#
+#     return render(request, 'shares_templates/calculations.html', context=context)
 
-            Args:
-                rf (float): Risk-free rate (e.g., 0.03 for 3%).
-                    beta (float): Beta of the asset (e.g., 1.2).
-                    rm (float): Expected market return (e.g., 0.08 for 8%).
 
-                Returns:
-                    float: Expected return of the asset.
-                """
-    result = None
-    rf = None
-    rm = None
-    beta = None
+class CalculateCAPM(FormView):
+    form_class = CAPMForm
+    template_name = 'shares_templates/calculations.html'
+    success_irl = reverse_lazy('calculate_capm')
 
-    if request.method == 'POST':
+    def form_valid(self, form):
+        rf = form.cleaned_data['risk_free_rate']
+        rm = form.cleaned_data['market_return']
+        beta = form.cleaned_data['beta_coefficient']
+
         try:
-            rf = float(request.POST.get('rf'))
-            rm = float(request.POST.get('rm'))
-            beta = float(request.POST.get('beta'))
-
             result = rf + beta * (rm - rf)
         except (ValueError, TypeError):
             result = "Invalid input. Please enter a valid number."
 
-    context = {
-        'operation_name': 'Capital Asset Pricing Model (CAPM)',
-        'input_fields': [
-            {'name': 'rf', 'label': 'Risk-free rate', 'description': 'Risk-free rate (e.g., 0.03 for 3%):',
-             'value': rf, 'placeholder': 'Enter Risk-free rate'},
-            {'name': 'rm', 'label': 'Expected market return',
-             'description': 'Expected market return (e.g., 0.08 for 8%):', 'value': rm,
-             'placeholder': 'Enter expected market return'},
-            {'name': 'beta', 'label': 'Beta coefficient of the asset',
-             'description': 'Beta of the asset (e.g., 1.2):', 'value': beta,
-             'placeholder': 'Beta coefficient of the asset'},
+        context = self.get_context_data(result=result, form=form)
+        return self.render_to_response(context)
 
-        ],
-        'result': result,
-
-    }
-
-    return render(request, 'shares_templates/calculate_shares_prices.html', context=context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['operation_name'] = 'Capital Asset Pricing Model (CAPM)'
+        return context
