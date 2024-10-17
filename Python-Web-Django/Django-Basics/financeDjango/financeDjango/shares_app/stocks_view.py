@@ -12,7 +12,7 @@ from financeDjango.shares_app.helpers import fetch_stock_price, fetch_historical
 
 # def calculate_preferences_shares_price(request):
 #     result = None
-# 
+#
 #     if request.method == 'POST':
 #         form = PreferencesSharesForm(request.POST)
 #         if form.is_valid():
@@ -51,7 +51,7 @@ class PreferenceSharesPrice(FormView):
         context = self.get_context_data(result=result, form=form)
         return self.render_to_response(context)
 
-    def get_context_data(selfself, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['operation_name'] = 'Preference Shares Price'
 

@@ -1,9 +1,9 @@
 from django.urls import path
 
-from financeDjango.home_menu_app.views import home_view, stock_operations_menu
+from financeDjango.home_menu_app import views
 
 urlpatterns = [
-    path('', home_view, name='home'),
-    path('shares-opeartions/', stock_operations_menu, name='stock_operations_menu'),
+    path('',views.HomeView.as_view() , name='home'),
+    path('shares-opeartions/', views.stock_operations_menu, name='stock_operations_menu'),
 
 ]

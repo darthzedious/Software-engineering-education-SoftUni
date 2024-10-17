@@ -3,6 +3,7 @@
 <ol>
         <li>
 {#             This is an example without custom authentication tag#}
+        
             <a class="dropdown-item"
                     {% if user.is_authenticated %}
                         href="{% url 'preference_shares' %}"

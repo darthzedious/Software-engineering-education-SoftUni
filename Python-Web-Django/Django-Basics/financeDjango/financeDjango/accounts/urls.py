@@ -1,13 +1,13 @@
 from django.urls import path
 
-from financeDjango.accounts.views import register_view, logout_view, login_view, load_profile
+from financeDjango.accounts import views
 
 urlpatterns = [
 
-    path('register/', register_view, name='register'),
+    path('register/', views.register_view, name='register'),
 
-    path('login/', login_view, name='login'),
+    path('login/', views.login_view, name='login'),
 
-    path('logout/', logout_view, name='logout'),
-    path('user/', load_profile, name='profile'),
+    path('logout/', views.logout_view, name='logout'),
+    path('user/', views.LoadProfile.as_view(), name='profile'),
 ]

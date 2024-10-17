@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
+from django.views.generic import TemplateView
 
 from financeDjango.accounts.forms import LoginForm, RegisterForm
 
@@ -47,5 +48,5 @@ def logout_view(request):
     return redirect('home')
 
 
-def load_profile(request):
-    return render(request, 'accounts_templates/user_profile.html')
+class LoadProfile(TemplateView):
+    template_name = 'accounts_templates/user_profile.html'
