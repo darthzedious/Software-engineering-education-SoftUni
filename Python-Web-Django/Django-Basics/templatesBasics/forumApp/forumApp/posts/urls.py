@@ -1,13 +1,14 @@
 from django.urls import path, include
-from forumApp.posts.views import dashboard, index, add_post, delete_post, edit_post, details_page
+from forumApp.posts import views
 
 urlpatterns = [
-    path('', index, name='index'),
-    path('dashboard/', dashboard, name='dash'),
-    path('add-post/', add_post, name='add-post'),
+    path('', views.IndexView.as_view(), name='index'),
+    path('dashboard/', views.DashboardView.as_view(), name='dash'),
+    path('add-post/', views.AddPostView.as_view(), name='add-post'),
     path('<int:pk>/', include([
-        path('delete-post/', delete_post, name='delete-post'),
-        path('details-post/', details_page, name='details-post'),
-        path('edit-post/', edit_post, name='edit-post'),
-    ]))
+        path('delete-post/', views.DeletePostView.as_view(), name='delete-post'),
+        path('details-post/', views.PostDetailView.as_view(), name='details-post'),
+        path('edit-post/', views.EditPostView.as_view(), name='edit-post'),
+    ])),
+    path('redirect-home/', views.RedirectHomeView.as_view(), name='redirect-home'),
 ]

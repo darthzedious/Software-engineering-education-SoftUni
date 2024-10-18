@@ -61,7 +61,7 @@ class PostEditForm(PostBaseForm):
 
 
 class PostDeleteForm(PostBaseForm, DisableFieldsMixin):
-    pass
+    disabled_fields = ('__all__',)
 
 
 class SearchForm(forms.Form):
