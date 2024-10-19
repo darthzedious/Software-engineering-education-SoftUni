@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'worldOfSpeed.base',
+    'worldOfSpeed.car_app',
+    'worldOfSpeed.profile_app',
 ]
 
 MIDDLEWARE = [
@@ -83,9 +86,9 @@ WSGI_APPLICATION = 'worldOfSpeed.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "mydatabase",
-        "USER": "mydatabaseuser",
-        "PASSWORD": "mypassword",
+        "NAME": "world_of_speed",
+        "USER": "postgres",
+        "PASSWORD": "a1999l",
         "HOST": "127.0.0.1",
         "PORT": "5432",
     }
