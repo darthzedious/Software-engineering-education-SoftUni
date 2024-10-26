@@ -1,5 +1,6 @@
 from django import forms
 
+from tatsyRecipes.mixins import PlaceholderMixin
 from tatsyRecipes.recipe_app.models import Recipe
 
 
@@ -19,3 +20,8 @@ class CreateRecipeForm(forms.ModelForm):
             'cooking_time': 'Cooking Time:',
             'image_url': 'Image URL:',
         }
+
+class EditRecipeForm(PlaceholderMixin, forms.ModelForm):
+    class Meta:
+        model = Recipe
+        exclude = ['author', ]
