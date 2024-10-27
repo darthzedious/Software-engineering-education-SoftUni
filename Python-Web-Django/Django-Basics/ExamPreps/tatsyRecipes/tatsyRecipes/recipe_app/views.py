@@ -27,7 +27,6 @@ class CataloguePageView(ListView):
 class RecipeDetailsView(DetailView):
     model = Recipe
     template_name = 'recipe/details-recipe.html'
-    success_url = reverse_lazy('recipe_details')
     pk_url_kwarg = 'recipe_id'
     context_object_name = 'recipe'
 
