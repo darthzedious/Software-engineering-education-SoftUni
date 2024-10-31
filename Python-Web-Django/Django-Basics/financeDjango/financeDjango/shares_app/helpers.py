@@ -1,6 +1,6 @@
 import os
 import requests
-import numpy as np
+
 
 def fetch_stock_price(symbol):
 
@@ -46,21 +46,13 @@ def fetch_historical_data(symbol, function='TIME_SERIES_MONTHLY_ADJUSTED', marke
     return stock_response, market_response
 
 def calculate_preference_shares_price(dividends, rate_of_return):
-    try:
-        return dividends / rate_of_return
-    except (ValueError, ZeroDivisionError):
-        return "Invalid input. Please enter a valid number."
+    return dividends / rate_of_return
 
 def calculate_ordinary_shares_price(dividends, rate_of_return, growth_rate):
-    try:
-        if rate_of_return <= growth_rate:
-            raise ValueError("The required rate of return must be greater than the growth rate.")
-        return round(dividends / (rate_of_return - growth_rate), 2)
-
-    except (ValueError, TypeError):
-        return "Invalid input. Please enter a valid number."
+    return round(dividends / (rate_of_return - growth_rate), 2)
 
 def calculate_return_on_equity(net_profit, equity_capital):
+    #TODO handle zero division error in the form
     try:
         return round(net_profit / equity_capital, 4)
     except (ValueError, TypeError):

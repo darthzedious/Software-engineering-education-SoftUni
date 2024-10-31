@@ -25,10 +25,14 @@
                         </div>
                     </form>
 
-                    {% if result is not None %}
+                    {% if error_message %}
+                        <p style="color:red;">{{ error_message }}</p>
+                    {% endif %}
+                
+                    {% if result is not None and not error_message %}
                         <div class="alert alert-success mt-3 text-center">
                             <h4>{{ operation_name }}: {{ result }}</h4>
-{#                        <h4>{{ result }}</h4>#}
+                            {#                        <h4>{{ result }}</h4>#}
                         </div>
                     {% endif %}
                 </div>

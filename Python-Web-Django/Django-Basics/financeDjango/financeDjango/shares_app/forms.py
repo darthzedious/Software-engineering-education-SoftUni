@@ -1,4 +1,8 @@
+from audioop import ratecv
+
 from django import forms
+from django.core.exceptions import ValidationError
+
 
 class BaseSharesForm(forms.Form):
     dividends = forms.DecimalField(
@@ -44,7 +48,11 @@ class BaseROEGrowthRateForm(forms.Form):
 
 
 class PreferencesSharesForm(BaseSharesForm):
-   pass
+   def clean_rate_of_return(self):
+       rate_of_return = self.cleaned_data.get('rate_of_return')
+       if rate_of_return == 0.0:
+           raise ValidationError("Rate of return cannot be zero.")
+       return rate_of_return
 
 
 class OrdinarySharesForm(BaseSharesForm):
@@ -57,6 +65,17 @@ class OrdinarySharesForm(BaseSharesForm):
         }),
         help_text='Enter the growth rate of dividends (as a decimal, e.g., 0.02 for 2%)',
     )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        rate_of_return = cleaned_data.get('rate_of_return')
+        growth_rate = cleaned_data.get('growth_rate')
+
+        if rate_of_return is not None and growth_rate is not None:
+            if rate_of_return <= growth_rate:
+                raise ValidationError("The required rate of return must be greater than the growth rate.")
+
+        return cleaned_data
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -147,42 +147,12 @@ class ReturnOnEquity(FormView):
         context['operation_name'] = self.operation_name
         return context
 
-
-
-# def calculate_growth_rate_of_dividends(request):
-#     """Retention Ratio (ki): The proportion of earnings a company retains for reinvestment,
-#      calculated as the percentage of net profit that is not distributed as dividends.
-#     The complement, 1 − ki, represents the Payout Ratio,
-#      or the portion of net income paid to shareholders as dividends."""
-#
-#
-#     result = None
-#
-#     if request.method == 'POST':
-#         form = GrowthRateOfDividendsForm(request.POST)
-#         if form.is_valid():
-#             net_profit = form.cleaned_data['net_profit']
-#             equity_capital = form.cleaned_data['equity_capital']
-#             ki = form.cleaned_data['retention_ratio']
-#             try:
-#                 roe = round(net_profit / equity_capital, 4)
-#
-#                 result = round(roe * (1 - ki), 4)
-#
-#             except (ValueError, TypeError):
-#                 result = "Invalid input. Please enter a valid number."
-#     else:
-#         form = GrowthRateOfDividendsForm()
-#
-#     context ={
-#         'operation_name': 'Calculate Growth Rate of Dividends',
-#         'form': form,
-#         'result': result,
-#     }
-#
-#     return render(request, 'shares_templates/calculations.html', context)
-
 class GrowthRateOfDividends(FormView):
+    """Retention Ratio (ki): The proportion of earnings a company retains for reinvestment,
+     calculated as the percentage of net profit that is not distributed as dividends.
+    The complement, 1 − ki, represents the Payout Ratio,
+     or the portion of net income paid to shareholders as dividends."""
+
     template_name = 'shares_templates/calculations.html'
     form_class = GrowthRateOfDividendsForm
     operation_name = 'Growth Rate of Dividends'
