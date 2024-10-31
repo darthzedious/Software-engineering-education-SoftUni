@@ -2,12 +2,13 @@ import os
 import numpy as np
 from django.shortcuts import render
 import requests
+
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 
-from financeDjango.shares_app.forms import PreferencesSharesForm, OrdinarySharesPrice, ReturnOnEquityForm, \
+from financeDjango.shares_app.forms import PreferencesSharesForm, OrdinarySharesForm, ReturnOnEquityForm, \
     GrowthRateOfDividendsForm, CAPMForm
-from financeDjango.shares_app.helpers import fetch_stock_price, fetch_historical_data
+from financeDjango.shares_app import helpers
 
 
 # def calculate_preferences_shares_price(request):
@@ -38,124 +39,167 @@ from financeDjango.shares_app.helpers import fetch_stock_price, fetch_historical
 class PreferenceSharesPrice(FormView):
     template_name = 'shares_templates/calculations.html'
     form_class = PreferencesSharesForm
-    success_url = reverse_lazy('preference_shares')
+    # success_url = reverse_lazy('preference_shares')
+    operation_name = 'Preference Shares Price'
 
     def form_valid(self, form):
         dividends = form.cleaned_data['dividends']
         rate_of_return = form.cleaned_data['rate_of_return']
-        try:
-            result = dividends / rate_of_return
-        except (ValueError, ZeroDivisionError):
-            result = "Invalid input. Please enter a valid number."
+        result = helpers.calculate_preference_shares_price(dividends, rate_of_return)
 
         context = self.get_context_data(result=result, form=form)
         return self.render_to_response(context)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['operation_name'] = 'Preference Shares Price'
+        context['operation_name'] = self.operation_name
 
         return context
 
 
-def calculate_ordinary_shares_price(request):
-    result = None
+# def calculate_ordinary_shares_price(request):
+#     result = None
+#
+#     if request.method == "POST":
+#         form = OrdinarySharesForm(request.POST)
+#         if form.is_valid():
+#             d = form.cleaned_data['dividends']
+#             r = form.cleaned_data['rate_of_return']
+#             g = form.cleaned_data['growth_rate']
+#
+            # try:
+            #     if r <= g:
+            #         raise ValueError("The required rate of return must be greater than the growth rate.")
+            #     result = round(d / (r - g), 2)
+            #
+            # except (ValueError, TypeError):
+            #     result = "Invalid input. Please enter a valid number."
+#     else:
+#         form = OrdinarySharesForm()
+#
+#     context = {
+#         'operation_name': 'Ordinary Shares Price',
+#         'form': form,
+#         'result': result,
+#     }
+#
+#     return render(request, 'shares_templates/calculations.html', context)
 
-    if request.method == "POST":
-        form = OrdinarySharesPrice(request.POST)
-        if form.is_valid():
-            d = form.cleaned_data['dividends']
-            r = form.cleaned_data['rate_of_return']
-            g = form.cleaned_data['growth_rate']
+class OrdinarySharesPrice(FormView):
+    template_name = 'shares_templates/calculations.html'
+    form_class = OrdinarySharesForm
+    operation_name = 'Ordinary Shares Price'
 
-            try:
-                if r <= g:
-                    raise ValueError("The required rate of return must be greater than the growth rate.")
-                result = round(d / (r - g), 2)
+    def form_valid(self, form):
+        dividend = form.cleaned_data['dividends']
+        rate_of_return = form.cleaned_data['rate_of_return']
+        growth_rate = form.cleaned_data['growth_rate']
+        result = helpers.calculate_ordinary_shares_price(dividend, rate_of_return, growth_rate)
 
-            except (ValueError, TypeError):
-                result = "Invalid input. Please enter a valid number."
-    else:
-        form = OrdinarySharesPrice()
+        context = self.get_context_data(result=result, form=form)
+        return self.render_to_response(context)
 
-    context = {
-        'operation_name': 'Ordinary Shares Price',
-        'form': form,
-        'result': result,
-    }
-
-    return render(request, 'shares_templates/calculations.html', context)
-
-
-def calculate_return_on_equity(request):
-    result = None
-
-    if request.method =="POST":
-        form = ReturnOnEquityForm(request.POST)
-        if form.is_valid():
-            net_profit = form.cleaned_data['net_profit']
-            equity_capital = form.cleaned_data['equity_capital']
-
-            try:
-                result =round(net_profit / equity_capital, 4)
-            except (ValueError, TypeError):
-                result = "Invalid input. Please enter a valid number."
-    else:
-        form = ReturnOnEquityForm()
-
-    # if request.method == 'POST':
-    #     try:
-    #         net_profit = float(request.POST.get('net_profit'))
-    #         equity_capital = float(request.POST.get('equity_capital'))
-    #
-    #         result =round(net_profit / equity_capital, 4)
-    #     except (ValueError, TypeError):
-    #         result = "Invalid input. Please enter a valid number."
-
-    context = {
-        'operation_name': 'Calculate Return on Equity',
-        'form': form,
-        'result': result,
-    }
-
-    return render(request, 'shares_templates/calculations.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['operation_name'] = self.operation_name
+        return context
 
 
-def calculate_growth_rate_of_dividends(request):
-    """Retention Ratio (ki): The proportion of earnings a company retains for reinvestment,
-     calculated as the percentage of net profit that is not distributed as dividends.
-    The complement, 1 − ki, represents the Payout Ratio,
-     or the portion of net income paid to shareholders as dividends."""
+# def calculate_return_on_equity(request):
+#     result = None
+#
+#     if request.method =="POST":
+#         form = ReturnOnEquityForm(request.POST)
+#         if form.is_valid():
+#             net_profit = form.cleaned_data['net_profit']
+#             equity_capital = form.cleaned_data['equity_capital']
+#
+#             try:
+#                 result =round(net_profit / equity_capital, 4)
+#             except (ValueError, TypeError):
+#                 result = "Invalid input. Please enter a valid number."
+#     else:
+#         form = ReturnOnEquityForm()
+#
+#     context = {
+#         'operation_name': 'Calculate Return on Equity',
+#         'form': form,
+#         'result': result,
+#     }
+#
+#     return render(request, 'shares_templates/calculations.html', context)
+
+class ReturnOnEquity(FormView):
+    template_name = 'shares_templates/calculations.html'
+    form_class = ReturnOnEquityForm
+    operation_name = 'Return On Equity'
+
+    def form_valid(self, form):
+        net_profit = form.cleaned_data['net_profit']
+        equity_capital = form.cleaned_data['equity_capital']
+        result = helpers.calculate_return_on_equity(net_profit, equity_capital)
+
+        context = self.get_context_data(result=result, form=form)
+        return self.render_to_response(context)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['operation_name'] = self.operation_name
+        return context
 
 
-    result = None
 
-    if request.method == 'POST':
-        form = GrowthRateOfDividendsForm(request.POST)
-        if form.is_valid():
-            net_profit = form.cleaned_data['net_profit']
-            equity_capital = form.cleaned_data['equity_capital']
-            ki = form.cleaned_data['retention_ratio']
-            try:
-                roe = round(net_profit / equity_capital, 4)
+# def calculate_growth_rate_of_dividends(request):
+#     """Retention Ratio (ki): The proportion of earnings a company retains for reinvestment,
+#      calculated as the percentage of net profit that is not distributed as dividends.
+#     The complement, 1 − ki, represents the Payout Ratio,
+#      or the portion of net income paid to shareholders as dividends."""
+#
+#
+#     result = None
+#
+#     if request.method == 'POST':
+#         form = GrowthRateOfDividendsForm(request.POST)
+#         if form.is_valid():
+#             net_profit = form.cleaned_data['net_profit']
+#             equity_capital = form.cleaned_data['equity_capital']
+#             ki = form.cleaned_data['retention_ratio']
+#             try:
+#                 roe = round(net_profit / equity_capital, 4)
+#
+#                 result = round(roe * (1 - ki), 4)
+#
+#             except (ValueError, TypeError):
+#                 result = "Invalid input. Please enter a valid number."
+#     else:
+#         form = GrowthRateOfDividendsForm()
+#
+#     context ={
+#         'operation_name': 'Calculate Growth Rate of Dividends',
+#         'form': form,
+#         'result': result,
+#     }
+#
+#     return render(request, 'shares_templates/calculations.html', context)
 
-                result = round(roe * (1 - ki), 4)
+class GrowthRateOfDividends(FormView):
+    template_name = 'shares_templates/calculations.html'
+    form_class = GrowthRateOfDividendsForm
+    operation_name = 'Growth Rate of Dividends'
 
-            except (ValueError, TypeError):
-                result = "Invalid input. Please enter a valid number."
-    else:
-        form = GrowthRateOfDividendsForm()
+    def form_valid(self, form):
+        net_profit = form.cleaned_data['net_profit']
+        equity_capital = form.cleaned_data['equity_capital']
+        ki = form.cleaned_data['retention_ratio']
+        result = helpers.calculate_growth_rate_of_dividends(net_profit, equity_capital, ki)
 
+        context = self.get_context_data(result=result, form=form)
+        return self.render_to_response(context)
 
-    context ={
-        'operation_name': 'Calculate Growth Rate of Dividends',
-        'form': form,
-        'result': result,
-    }
-
-    return render(request, 'shares_templates/calculations.html', context)
-
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['operation_name'] = self.operation_name
+        return context
 
 def get_fundamental_stock_data(request):
     symbol = request.GET.get('symbol')
@@ -202,7 +246,7 @@ def get_live_stock_price(request):
     error_message = None
 
     if symbol:
-        stock_price = fetch_stock_price(symbol)
+        stock_price = helpers.fetch_stock_price(symbol)
         if stock_price is None:
             error_message = f"Error retrieving price for symbol {symbol}."
 
@@ -224,7 +268,7 @@ def get_top_10_stock_prices(request):
     error_message = None
 
     for symbol in top_10_symbols:
-        price = fetch_stock_price(symbol)
+        price = helpers.fetch_stock_price(symbol)
         if price is not None:
             stock_prices[symbol] = price
         else:
@@ -243,7 +287,7 @@ def calculate_beta_coefficient(request):
     error_message = None
 
     if symbol:
-        stock_data, market_data = fetch_historical_data(symbol)
+        stock_data, market_data = helpers.fetch_historical_data(symbol)
 
         try:
             # Extract closing prices and calculate returns
@@ -281,54 +325,22 @@ def calculate_beta_coefficient(request):
 
     return render(request, 'shares_templates/calculate_beta.html', context)
 
-
-# def calculate_capm(request):
-#     result = None
-#
-#     if request.method == 'POST':
-#         form = CAPMForm(request.POST)
-#         if form.is_valid():
-#
-#             rf = form.cleaned_data['risk_free_rate']
-#             rm = form.cleaned_data['market_return']
-#             beta = form.cleaned_data['beta_coefficient']
-#
-#             try:
-#                 result = rf + beta * (rm - rf)
-#             except (ValueError, TypeError):
-#                 result = "Invalid input. Please enter a valid number."
-#     else:
-#         form = CAPMForm()
-#
-#     context = {
-#         'operation_name': 'Capital Asset Pricing Model (CAPM)',
-#         'form': form,
-#         'result': result,
-#
-#     }
-#
-#     return render(request, 'shares_templates/calculations.html', context=context)
-
-
 class CalculateCAPM(FormView):
     form_class = CAPMForm
     template_name = 'shares_templates/calculations.html'
     success_irl = reverse_lazy('calculate_capm')
+    operation_name = 'Capital Asset Pricing Model (CAPM)'
 
     def form_valid(self, form):
-        rf = form.cleaned_data['risk_free_rate']
-        rm = form.cleaned_data['market_return']
-        beta = form.cleaned_data['beta_coefficient']
-
-        try:
-            result = rf + beta * (rm - rf)
-        except (ValueError, TypeError):
-            result = "Invalid input. Please enter a valid number."
+        risk_free_rate = form.cleaned_data['risk_free_rate']
+        market_return = form.cleaned_data['market_return']
+        beta_coefficient = form.cleaned_data['beta_coefficient']
+        result = helpers.calculate_cpam(risk_free_rate, market_return, beta_coefficient)
 
         context = self.get_context_data(result=result, form=form)
         return self.render_to_response(context)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['operation_name'] = 'Capital Asset Pricing Model (CAPM)'
+        context['operation_name'] = self.operation_name
         return context

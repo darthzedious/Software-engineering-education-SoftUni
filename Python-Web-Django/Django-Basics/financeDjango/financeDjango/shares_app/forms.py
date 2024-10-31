@@ -47,7 +47,7 @@ class PreferencesSharesForm(BaseSharesForm):
    pass
 
 
-class OrdinarySharesPrice(BaseSharesForm):
+class OrdinarySharesForm(BaseSharesForm):
     growth_rate = forms.DecimalField(
         required=True,
         label='',
