@@ -6,6 +6,7 @@ import requests
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 
+from financeDjango.mixins import OperationNameContextMixin
 from financeDjango.shares_app.forms import PreferencesSharesForm, OrdinarySharesForm, ReturnOnEquityForm, \
     GrowthRateOfDividendsForm, CAPMForm
 from financeDjango.shares_app import helpers
@@ -36,7 +37,7 @@ from financeDjango.shares_app import helpers
 #
 #     return render(request, 'shares_templates/calculations.html', context)
 
-class PreferenceSharesPrice(FormView):
+class PreferenceSharesPrice(OperationNameContextMixin, FormView):
     template_name = 'shares_templates/calculations.html'
     form_class = PreferencesSharesForm
     # success_url = reverse_lazy('preference_shares')
@@ -50,42 +51,7 @@ class PreferenceSharesPrice(FormView):
         context = self.get_context_data(result=result, form=form)
         return self.render_to_response(context)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['operation_name'] = self.operation_name
-
-        return context
-
-
-# def calculate_ordinary_shares_price(request):
-#     result = None
-#
-#     if request.method == "POST":
-#         form = OrdinarySharesForm(request.POST)
-#         if form.is_valid():
-#             d = form.cleaned_data['dividends']
-#             r = form.cleaned_data['rate_of_return']
-#             g = form.cleaned_data['growth_rate']
-#
-            # try:
-            #     if r <= g:
-            #         raise ValueError("The required rate of return must be greater than the growth rate.")
-            #     result = round(d / (r - g), 2)
-            #
-            # except (ValueError, TypeError):
-            #     result = "Invalid input. Please enter a valid number."
-#     else:
-#         form = OrdinarySharesForm()
-#
-#     context = {
-#         'operation_name': 'Ordinary Shares Price',
-#         'form': form,
-#         'result': result,
-#     }
-#
-#     return render(request, 'shares_templates/calculations.html', context)
-
-class OrdinarySharesPrice(FormView):
+class OrdinarySharesPrice(OperationNameContextMixin, FormView):
     template_name = 'shares_templates/calculations.html'
     form_class = OrdinarySharesForm
     operation_name = 'Ordinary Shares Price'
@@ -98,11 +64,6 @@ class OrdinarySharesPrice(FormView):
 
         context = self.get_context_data(result=result, form=form)
         return self.render_to_response(context)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['operation_name'] = self.operation_name
-        return context
 
 
 # def calculate_return_on_equity(request):
@@ -129,7 +90,7 @@ class OrdinarySharesPrice(FormView):
 #
 #     return render(request, 'shares_templates/calculations.html', context)
 
-class ReturnOnEquity(FormView):
+class ReturnOnEquity(OperationNameContextMixin, FormView):
     template_name = 'shares_templates/calculations.html'
     form_class = ReturnOnEquityForm
     operation_name = 'Return On Equity'
@@ -142,12 +103,8 @@ class ReturnOnEquity(FormView):
         context = self.get_context_data(result=result, form=form)
         return self.render_to_response(context)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['operation_name'] = self.operation_name
-        return context
 
-class GrowthRateOfDividends(FormView):
+class GrowthRateOfDividends(OperationNameContextMixin, FormView):
     """Retention Ratio (ki): The proportion of earnings a company retains for reinvestment,
      calculated as the percentage of net profit that is not distributed as dividends.
     The complement, 1 − ki, represents the Payout Ratio,
@@ -165,11 +122,6 @@ class GrowthRateOfDividends(FormView):
 
         context = self.get_context_data(result=result, form=form)
         return self.render_to_response(context)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['operation_name'] = self.operation_name
-        return context
 
 def get_fundamental_stock_data(request):
     symbol = request.GET.get('symbol')
@@ -295,10 +247,9 @@ def calculate_beta_coefficient(request):
 
     return render(request, 'shares_templates/calculate_beta.html', context)
 
-class CalculateCAPM(FormView):
+class CalculateCAPM(OperationNameContextMixin, FormView):
     form_class = CAPMForm
     template_name = 'shares_templates/calculations.html'
-    success_irl = reverse_lazy('calculate_capm')
     operation_name = 'Capital Asset Pricing Model (CAPM)'
 
     def form_valid(self, form):
@@ -309,8 +260,3 @@ class CalculateCAPM(FormView):
 
         context = self.get_context_data(result=result, form=form)
         return self.render_to_response(context)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['operation_name'] = self.operation_name
-        return context

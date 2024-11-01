@@ -46,6 +46,12 @@ class BaseROEGrowthRateForm(forms.Form):
         help_text='Enter the equity capital of the company',
     )
 
+    def clean_equity_capital(self):
+        equity_capital = self.cleaned_data.get('equity_capital')
+        if equity_capital == 0.0:
+            raise ValidationError('Equity capital cannot be zero.')
+        return equity_capital
+
 
 class PreferencesSharesForm(BaseSharesForm):
    def clean_rate_of_return(self):

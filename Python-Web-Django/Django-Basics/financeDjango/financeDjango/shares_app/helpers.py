@@ -52,23 +52,12 @@ def calculate_ordinary_shares_price(dividends, rate_of_return, growth_rate):
     return round(dividends / (rate_of_return - growth_rate), 2)
 
 def calculate_return_on_equity(net_profit, equity_capital):
-    #TODO handle zero division error in the form
-    try:
-        return round(net_profit / equity_capital, 4)
-    except (ValueError, TypeError):
-        return "Invalid input. Please enter a valid number."
+    return round(net_profit / equity_capital, 4)
+
 
 def calculate_growth_rate_of_dividends(net_profit, equity_capital, ki):
-    try:
-        roe = round(net_profit / equity_capital, 4)
-
-        return round(roe * (1 - ki), 4)
-
-    except (ValueError, TypeError):
-        return "Invalid input. Please enter a valid number."
+    roe = calculate_return_on_equity(net_profit, equity_capital)
+    return round(roe * (1 - ki), 4)
 
 def calculate_cpam(risk_free_rate, market_return, beta_coefficient):
-    try:
-        return risk_free_rate + beta_coefficient * (market_return - risk_free_rate)
-    except (ValueError, TypeError):
-        return "Invalid input. Please enter a valid number."
+    return risk_free_rate + beta_coefficient * (market_return - risk_free_rate)

@@ -8,7 +8,7 @@
             <a class="navbar-brand" href="{% url 'profile' %}">Profile</a>
         {% endif %}
 
-         <!-- Container to hold the flex items (authentication and toggler) -->
+        <!-- Container to hold the flex items (authentication and toggler) -->
         <div class="d-flex justify-content-end align-items-center flex-grow-1">
 
             <!-- User Authentication Section -->
@@ -45,18 +45,41 @@
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-dark">
-                            {% include 'home_menu/stock_shares_operation_menu.html' %}
+                            {% include 'home_menu/nav/stock_shares_operation_menu.html' %}
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{% url 'future-value-menu' %}" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Future value
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            {% include 'home_menu/nav/future_value_nav.html' %}
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{% url 'stock_operations_menu' %}" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Discount Factor
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-dark">
+{#                            {% include 'home_menu/stock_shares_operation_menu.html' %}#}
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                         </ul>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Fundamental formulas</a>
-                    </li>
-
-                </ul>
 
                 {#        <form class="d-flex mt-3" role="search">#}
                 {#          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">#}
