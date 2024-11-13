@@ -1,11 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 
 from financeDjango.accounts.forms import LoginForm, RegisterForm
 
-
+LoginView
 # Create your views here.
 def login_view(request):
     if request.method == "POST":
