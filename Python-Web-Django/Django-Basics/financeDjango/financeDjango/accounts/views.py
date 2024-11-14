@@ -2,7 +2,7 @@ from django.contrib.auth import  login, logout, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView
 
 from financeDjango.accounts.forms import RegisterForm, ProfileEditForm
@@ -33,6 +33,9 @@ UserModel = get_user_model()
 class UserLoginView(LoginView):
     template_name = 'accounts_templates/log_in.html'
 
+    def get_success_url(self):
+        return reverse('profile-details', kwargs={'pk': self.request.user.pk})
+
 # def register_view(request):
 #     if request.method == "POST":
 #         form = RegisterForm(request.POST)
@@ -53,11 +56,11 @@ class UserRegisterView(CreateView):
     model = UserModel
     form_class = RegisterForm
     template_name = 'accounts_templates/register.html'
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        login(self.request, self.object)
+        login(self.request, self.object, backend='financeDjango.accounts.authentication.EmailOrUsernameBackend')
 
         return response
 
