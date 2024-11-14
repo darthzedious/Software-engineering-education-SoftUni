@@ -1,13 +1,15 @@
 from django.contrib.auth import  login, logout, get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import , CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView
 
-from financeDjango.accounts.forms import LoginForm, RegisterForm
+from financeDjango.accounts.forms import RegisterForm, ProfileEditForm
+from financeDjango.accounts.models import Profile
 
 UserModel = get_user_model()
-# Create your views here.
+
 # def login_view(request):
 #     if request.method == "POST":
 #         form = LoginForm(request, data=request.POST)
@@ -65,4 +67,22 @@ def logout_view(request):
 
 
 class LoadProfile(DetailView):
+    model = UserModel
     template_name = 'accounts_templates/user_profile.html'
+
+class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Profile
+    form_class = ProfileEditForm
+    template_name = ''
+
+    def test_func(self):
+        profile = get_object_or_404(Profile, pk=self.kwargs['pk'])
+        return self.request.user == profile.user
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'profile-details',
+            kwargs={
+                'pk': self.object.pk,
+            }
+        )
