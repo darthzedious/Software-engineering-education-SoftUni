@@ -51,7 +51,7 @@
                             </li>
                         </ul>
                     </li>
-                    
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="{% url 'future-value-menu' %}" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
@@ -65,7 +65,7 @@
                             </li>
                         </ul>
                     </li>
-                    
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="{% url 'stock_operations_menu' %}" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
@@ -73,7 +73,6 @@
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-dark">
-{#                            {% include 'home_menu/stock_shares_operation_menu.html' %}#}
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -81,11 +80,12 @@
                     </li>
 
 
-                {#        <form class="d-flex mt-3" role="search">#}
-                {#          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">#}
-                {#          <button class="btn btn-success" type="submit">Search</button>#}
-                {#        </form>#}
-                {% include 'home_menu/authentication.html' %}
+                    {#        <form class="d-flex mt-3" role="search">#}
+                    {#          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">#}
+                    {#          <button class="btn btn-success" type="submit">Search</button>#}
+                    {#        </form>#}
+                    {% include 'home_menu/authentication.html' %}
+                </ul>
             </div>
         </div>
     </div>

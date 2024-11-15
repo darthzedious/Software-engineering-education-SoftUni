@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import FormView
 
 from financeDjango.future_value_app.forms import FutureValueBaseForm
@@ -5,7 +6,7 @@ from financeDjango.future_value_app.helpers import future_value_simple_interest,
 from financeDjango.mixins import OperationNameContextMixin
 
 
-class FutureValueSimpleInterest(OperationNameContextMixin, FormView):
+class FutureValueSimpleInterest(LoginRequiredMixin, OperationNameContextMixin, FormView):
     template_name = 'future_value_templates/future_value.html'
     form_class = FutureValueBaseForm
     operation_name = 'Future Value with simple interest'
@@ -20,7 +21,7 @@ class FutureValueSimpleInterest(OperationNameContextMixin, FormView):
         return self.render_to_response(context)
 
 
-class FutureValueCompoundInterest(OperationNameContextMixin, FormView):
+class FutureValueCompoundInterest(LoginRequiredMixin, OperationNameContextMixin, FormView):
     template_name = 'future_value_templates/future_value.html'
     form_class = FutureValueBaseForm
     operation_name = 'Future Value with compound interest'

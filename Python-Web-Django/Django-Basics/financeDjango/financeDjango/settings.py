@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'financeDjango.shares_app.apps.SharesAppConfig',
     'financeDjango.home_menu_app.apps.HomeMenuConfig',
     'financeDjango.accounts.apps.AccountsConfig',
-    'financeDjango.future_value_app.apps.FutureValueAppConfig'
+    'financeDjango.future_value_app.apps.FutureValueAppConfig',
+    'financeDjango.discount_factor_app.apps.DiscountFactorAppConfig'
 ]
 
 MIDDLEWARE = [
