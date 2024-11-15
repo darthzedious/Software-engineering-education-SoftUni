@@ -1,7 +1,7 @@
 from django.contrib.auth import  login, logout, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView
 
@@ -66,7 +66,7 @@ class UserRegisterView(CreateView):
 
 def logout_view(request):
     logout(request)
-    return redirect('home')
+    return redirect('login')
 
 
 class LoadProfile(DetailView):
