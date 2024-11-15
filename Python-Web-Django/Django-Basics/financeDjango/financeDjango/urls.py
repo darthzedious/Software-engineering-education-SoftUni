@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+import financeDjango
 from financeDjango import shares_app
 
 urlpatterns = [
@@ -25,4 +26,5 @@ urlpatterns = [
     path('shares/', include('financeDjango.shares_app.urls')),
     path('accounts/', include('financeDjango.accounts.urls')),
     path('future-value/', include('financeDjango.future_value_app.urls')),
+    path('discount-factor/', include('financeDjango.discount_factor_app.urls')),
 ]
