@@ -76,7 +76,7 @@ class LoadProfile(DetailView):
 class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Profile
     form_class = ProfileEditForm
-    template_name = ''
+    template_name = 'accounts_templates/profile-edit.html'
 
     def test_func(self):
         profile = get_object_or_404(Profile, pk=self.kwargs['pk'])

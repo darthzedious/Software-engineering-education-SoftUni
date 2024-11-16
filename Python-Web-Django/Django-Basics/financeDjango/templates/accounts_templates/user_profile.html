@@ -1,36 +1,44 @@
 {% extends 'home_menu/home.html' %}
 
 {% block content %}
-<div class="container mt-4">
-    <div class="card">
-        <div class="card-header bg-primary text-white">
-            <h3>Profile Details</h3>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <!-- Profile Picture -->
-                <div class="col-md-4 text-center">
-                    {% if profile.profile_picture %}
-                        <img src="{{ profile.profile_picture }}" alt="Profile Picture" class="img-fluid rounded-circle" style="max-width: 200px;">
-                    {% else %}
-                        <img src="https://via.placeholder.com/200" alt="Default Profile Picture" class="img-fluid rounded-circle" style="max-width: 200px;">
-                    {% endif %}
-                </div>
-
-                <!-- Profile Information -->
-                <div class="col-md-8">
-                    <p><strong>Full Name:</strong> {{ profile.get_full_name }}</p>
-                    <p><strong>Date of Birth:</strong> 
-                        {% if profile.date_of_birth %}
-                            {{ profile.date_of_birth }}
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3>Profile Details</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <!-- Profile Picture -->
+                    <div class="col-md-4 text-center">
+                        {% if object.profile.profile_picture %}
+                            <img src="{{ object.profile.profile_picture }}" alt="Profile Picture"
+                                 class="img-fluid rounded-circle" style="max-width: 200px;">
                         {% else %}
-                            Not provided
+                            <img src="https://via.placeholder.com/200" alt="Default Profile Picture"
+                                 class="img-fluid rounded-circle" style="max-width: 200px;">
                         {% endif %}
-                    </p>
-                    <p><strong>Email:</strong> {{ profile.user.email }}</p>
+                    </div>
+
+                    <!-- Profile Information -->
+                    <div class="col-md-8">
+                        <p><strong>Full Name:</strong> {{ object.profile.get_full_name }}</p>
+                        <p><strong>Date of Birth:</strong>
+                            {% if object.profile.date_of_birth %}
+                                {{ object.profile.date_of_birth }}
+                            {% else %}
+                                Not provided
+                            {% endif %}
+                        </p>
+                        <p><strong>Email:</strong> {{ object.profile.user.email }}</p>
+                    </div>
                 </div>
+            </div>
+            <div class="card-footer text-right">
+                <!-- Edit Button -->
+                <a href="{% url 'profile-edit' object.profile.pk %}" class="btn btn-primary">
+                    Edit Profile
+                </a>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
