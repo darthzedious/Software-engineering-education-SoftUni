@@ -6,5 +6,6 @@ urlpatterns = [
     path('',views.HomeView.as_view() , name='home'),
     path('shares-opeartions/', views.stock_operations_menu, name='stock_operations_menu'),
     path('future-value/', views.future_value_menu, name='future-value-menu'),
+    path('discount-factor/', views.discount_factor_menu, name='discount-factor-menu'),
 
 ]

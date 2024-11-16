@@ -67,12 +67,13 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="{% url 'stock_operations_menu' %}" role="button"
+                        <a class="nav-link dropdown-toggle" href="{% url 'discount-factor-menu' %}" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             Discount Factor
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-dark">
+                            {% include 'home_menu/nav/discount_factor_nav.html' %}
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

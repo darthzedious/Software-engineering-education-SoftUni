@@ -7,7 +7,7 @@ from financeDjango.mixins import OperationNameContextMixin
 
 
 class FutureValueSimpleInterest(LoginRequiredMixin, OperationNameContextMixin, FormView):
-    template_name = 'future_value_templates/future_value.html'
+    template_name = 'shares_templates/calculations.html'
     form_class = FutureValueBaseForm
     operation_name = 'Future Value with simple interest'
 
@@ -22,7 +22,7 @@ class FutureValueSimpleInterest(LoginRequiredMixin, OperationNameContextMixin, F
 
 
 class FutureValueCompoundInterest(LoginRequiredMixin, OperationNameContextMixin, FormView):
-    template_name = 'future_value_templates/future_value.html'
+    template_name = 'shares_templates/calculations.html'
     form_class = FutureValueBaseForm
     operation_name = 'Future Value with compound interest'
 
