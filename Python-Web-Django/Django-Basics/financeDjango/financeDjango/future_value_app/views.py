@@ -20,7 +20,6 @@ class FutureValueSimpleInterest(LoginRequiredMixin, OperationNameContextMixin, F
         context = self.get_context_data(result=result, form=form)
         return self.render_to_response(context)
 
-
 class FutureValueCompoundInterest(LoginRequiredMixin, OperationNameContextMixin, FormView):
     template_name = 'shares_templates/calculations.html'
     form_class = FutureValueBaseForm

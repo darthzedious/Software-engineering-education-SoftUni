@@ -1,11 +1,11 @@
 <div class="d-flex align-items-center ms-auto">
     {% if user.is_authenticated %}
-        
+
         <p class="me-3 mb-0 text-light">Hello, {{ user.username }}!</p>
 
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
-            <button class="btn btn-danger me-2" type="submit"><i>Logout</i></button>
+            <button class="btn btn-primary me-2" type="submit"><i>Logout</i></button>
         </form>
 
     {% else %}

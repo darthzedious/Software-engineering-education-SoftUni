@@ -7,8 +7,6 @@ from financeDjango.discount_factor_app.helpers import calculate_the_discount_fac
 from financeDjango.mixins import OperationNameContextMixin
 
 
-# Create your views here.
-
 class CalculateDiscountFactor(LoginRequiredMixin, OperationNameContextMixin, FormView):
     template_name = 'shares_templates/calculations.html'
     form_class = DiscountFactorForm
@@ -21,7 +19,6 @@ class CalculateDiscountFactor(LoginRequiredMixin, OperationNameContextMixin, For
 
         context = self.get_context_data(result=result, form=form)
         return self.render_to_response(context)
-
 
 class DiscountingPresentValue(LoginRequiredMixin, OperationNameContextMixin, FormView):
     template_name = 'shares_templates/calculations.html'
