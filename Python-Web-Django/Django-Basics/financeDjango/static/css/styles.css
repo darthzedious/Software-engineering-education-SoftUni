@@ -7,3 +7,31 @@
 html {
     scroll-behavior: smooth;
 }
+form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+form .form-label {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+form .btn-primary {
+    background-color: #007bff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+form .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-header {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+}

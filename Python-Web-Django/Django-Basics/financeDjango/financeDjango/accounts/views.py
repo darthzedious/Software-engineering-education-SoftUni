@@ -5,7 +5,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView
 
-from financeDjango.accounts.forms import RegisterForm, ProfileEditForm
+from financeDjango.accounts.forms import RegisterForm, ProfileEditForm, LoginForm
 from financeDjango.accounts.models import Profile
 
 UserModel = get_user_model()
@@ -32,6 +32,7 @@ UserModel = get_user_model()
 
 class UserLoginView(LoginView):
     template_name = 'accounts_templates/log_in.html'
+    form_class = LoginForm
 
     def get_success_url(self):
         return reverse('profile-details', kwargs={'pk': self.request.user.pk})

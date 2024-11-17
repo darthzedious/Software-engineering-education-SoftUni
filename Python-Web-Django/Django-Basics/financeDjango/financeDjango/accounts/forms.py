@@ -24,4 +24,17 @@ class ProfileEditForm(PlaceholderMixin, forms.ModelForm):
         exclude = ('user', )
 
 class LoginForm(PlaceholderMixin, AuthenticationForm):
-    username = forms.CharField(label="Username or Email")
+    username = forms.CharField(
+        label="Username or Email",
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your username or email'
+        })
+    )
+    password = forms.CharField(
+        label="Password",
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your password'
+        })
+    )
