@@ -11,3 +11,6 @@ class TransactionForm(forms.ModelForm):
             'amount': forms.NumberInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
         }
+
+class PortfolioForm(forms.ModelForm):
+    pass
