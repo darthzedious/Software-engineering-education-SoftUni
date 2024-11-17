@@ -1,5 +1,3 @@
-from audioop import ratecv
-
 from django import forms
 from django.core.exceptions import ValidationError
 

@@ -1,37 +1,64 @@
-.form-container {
-        min-height: 400px; /* Adjust as per your form height */
-        position: relative;
-    }
+/*.form-container {*/
+/*        min-height: 400px; !* Adjust as per your form height *!*/
+/*        position: relative;*/
+/*    }*/
 
-    /* Prevent jumpiness by keeping everything centered and smooth */
-html {
-    scroll-behavior: smooth;
-}
-form .form-group {
-    margin-bottom: 1.5rem;
-}
+/*    !* Prevent jumpiness by keeping everything centered and smooth *!*/
+/*html {*/
+/*    scroll-behavior: smooth;*/
+/*}*/
+/*form .form-group {*/
+/*    margin-bottom: 1.5rem;*/
+/*}*/
 
-form .form-label {
-    font-size: 1.1rem;
-    color: #333;
-}
+/*form .form-label {*/
+/*    font-size: 1.1rem;*/
+/*    color: #333;*/
+/*}*/
 
-form .btn-primary {
-    background-color: #007bff;
-    border: none;
-    transition: background-color 0.3s ease;
-}
+/*form .btn-primary {*/
+/*    background-color: #007bff;*/
+/*    border: none;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
 
-form .btn-primary:hover {
-    background-color: #0056b3;
-}
+/*form .btn-primary:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/
 
-.card {
-    border-radius: 10px;
-    overflow: hidden;
-}
+/*!*.card {*!*/
+/*!*    border-radius: 10px;*!*/
+/*!*    overflow: hidden;*!*/
+/*!*}*!*/
 
-.card-header {
-    font-size: 1.25rem;
-    text-transform: uppercase;
-}
+/*.card-header {*/
+/*    font-size: 1.25rem;*/
+/*    text-transform: uppercase;*/
+/*}*/
+
+/*!* Ensures the card has a consistent size and stays centered *!*/
+/*.card {*/
+/*    width: 100%;               !* Ensure the card spans full width within container *!*/
+/*    max-width: 600px;          !* Maximum width for the card *!*/
+/*    margin: 0 auto;            !* Horizontally center the card *!*/
+/*    border-radius: 8px;        !* Optional: Rounded corners *!*/
+/*    overflow: hidden;          !* Prevent overflow *!*/
+/*}*/
+
+/*!* For the card body, add consistent padding *!*/
+/*.card-body {*/
+/*    padding: 30px;             !* Uniform padding inside the card *!*/
+/*}*/
+
+/*!* Make the button look consistent and add margin *!*/
+/*button {*/
+/*    width: 100%;               !* Ensure the button spans full width of the card *!*/
+/*    padding: 10px;             !* Add padding inside button *!*/
+/*}*/
+
+/*!* On smaller screens, reduce the form width *!*/
+/*@media (max-width: 767px) {*/
+/*    .card {*/
+/*        max-width: 90%;         !* Reduce width to 90% on smaller screens *!*/
+/*    }*/
+/*}*/

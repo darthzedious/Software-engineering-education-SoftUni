@@ -70,7 +70,7 @@ def logout_view(request):
     return redirect('login')
 
 
-class LoadProfile(DetailView):
+class LoadProfile(LoginRequiredMixin, DetailView):
     model = UserModel
     template_name = 'accounts_templates/user_profile.html'
 
