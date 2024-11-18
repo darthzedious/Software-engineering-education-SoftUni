@@ -2,11 +2,16 @@
 {% load static %}
 
 {% block content %}
-<h2>Your Portfolios</h2>
-<ul>
-    {% for portfolio in portfolios %}
-        <li>{{ portfolio.name }} - {{ portfolio.description }}</li>
-    {% endfor %}
-</ul>
+    <h2>Your Portfolios</h2>
+    <ul>
+        {% for portfolio in portfolio %}
+            <li>{{ portfolio.name }} - {{ portfolio.description }}; {{ portfolio.created_at }}</li>
+        {% endfor %}
+    </ul>
 
+    {% include 'personal_actions_templates/pagination.html' %}
+    
+    <a href="{% url 'create-portfolio' %}" class="btn btn-light">
+        Create Portfolio
+    </a>
 {% endblock %}

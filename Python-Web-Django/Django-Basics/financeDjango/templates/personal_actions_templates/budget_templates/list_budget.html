@@ -23,6 +23,10 @@
         {% endfor %}
     </tbody>
 </table>
-
+    {% include 'personal_actions_templates/pagination.html' %}
+    
+    <a href="{% url 'create-budget' %}" class="btn btn-light">
+        Add Budget
+    </a>
 
 {% endblock %}
