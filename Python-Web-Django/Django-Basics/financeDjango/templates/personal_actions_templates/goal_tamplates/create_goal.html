@@ -1,0 +1,12 @@
+{% extends 'home_menu/home.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Create Financial Goal</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Add Goal</button>
+</form>
+
+{% endblock %}

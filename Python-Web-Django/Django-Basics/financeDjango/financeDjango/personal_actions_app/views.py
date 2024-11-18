@@ -3,8 +3,8 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView
 
 from financeDjango.mixins import PlaceholderMixin
-from financeDjango.personal_actions_app.forms import TransactionForm
-from financeDjango.personal_actions_app.models import Transaction
+from financeDjango.personal_actions_app.forms import TransactionForm, PortfolioForm
+from financeDjango.personal_actions_app.models import Transaction, InvestmentPortfolio
 
 
 class CreateTransactionView(LoginRequiredMixin, CreateView):
@@ -29,4 +29,17 @@ class TransactionListView(LoginRequiredMixin, ListView):
 
 
 class CreatePortfolioView(LoginRequiredMixin, CreateView):
+    model = InvestmentPortfolio
+    form_class = PortfolioForm
+    template_name = 'personal_actions_templates/portfolio_templates/create-portfolio.html'
+    success_url = reverse_lazy('show-portfolio')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class PortfolioListView(LoginRequiredMixin, ListView):
+    model = InvestmentPortfolio
+    template_name = 'personal_actions_templates/portfolio_templates/portfolio-list.html'
 

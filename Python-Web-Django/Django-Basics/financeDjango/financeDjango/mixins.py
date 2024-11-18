@@ -16,3 +16,9 @@ class PlaceholderMixin:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.add_placeholders()
+
+class CreateActionFormValidMixin:
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
