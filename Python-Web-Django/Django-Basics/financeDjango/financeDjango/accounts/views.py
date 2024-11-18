@@ -7,6 +7,7 @@ from django.views.generic import CreateView, DetailView, UpdateView
 
 from financeDjango.accounts.forms import RegisterForm, ProfileEditForm, LoginForm
 from financeDjango.accounts.models import Profile
+from financeDjango.personal_actions_app.models import FinancialGoal, Budget
 
 UserModel = get_user_model()
 
@@ -73,6 +74,13 @@ def logout_view(request):
 class LoadProfile(LoginRequiredMixin, DetailView):
     model = UserModel
     template_name = 'accounts_templates/user_profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['biggest_goal'] = (FinancialGoal.objects.filter(user=self.request.user)
+                                   .order_by('-target_amount', '-deadline').first())
+        context['latest_budget'] = Budget.objects.filter(user=self.request.user).order_by('start_date').first()
+        return context
 
 class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Profile

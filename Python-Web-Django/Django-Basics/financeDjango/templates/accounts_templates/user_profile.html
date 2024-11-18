@@ -14,6 +14,9 @@
                 <a href="{% url 'show-budgets' %}" class="btn btn-light">
                     Budget
                 </a>
+                <a href="{% url 'show-goals' %}" class="btn btn-light">
+                    Goals
+                </a>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -39,6 +42,8 @@
                             {% endif %}
                         </p>
                         <p><strong>Email:</strong> {{ object.profile.user.email }}</p>
+                        <p><strong>Current Budget:</strong> {{ latest_budget }}</p>
+                        <p><strong>Biggest Goal:</strong> {{ biggest_goal }}</p>
                     </div>
                 </div>
             </div>

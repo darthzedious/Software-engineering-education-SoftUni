@@ -14,4 +14,4 @@ class FinancialGoal(models.Model):
     deadline = models.DateField()
 
     def __str__(self):
-        return f"{self.title} - {self.user.email}"
+        return f"{self.title}: {self.saved_amount}/{self.target_amount}"

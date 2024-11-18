@@ -24,4 +24,4 @@ class Budget(models.Model):
     end_date = models.DateField()
 
     def __str__(self):
-        return f"{self.category} Budget for {self.user.email}"
+        return f"{self.amount} for period {self.start_date} to {self.end_date}"

@@ -3,8 +3,8 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView
 
 from financeDjango.mixins import CreateActionFormValidMixin, OperationNameContextMixin
-from financeDjango.personal_actions_app.forms import TransactionForm, PortfolioForm, BudgetForm
-from financeDjango.personal_actions_app.models import Transaction, InvestmentPortfolio, Budget
+from financeDjango.personal_actions_app.forms import TransactionForm, PortfolioForm, BudgetForm, GoalForm
+from financeDjango.personal_actions_app.models import Transaction, InvestmentPortfolio, Budget, FinancialGoal
 
 
 class CreateTransactionView(LoginRequiredMixin, CreateActionFormValidMixin, OperationNameContextMixin,  CreateView):
@@ -62,4 +62,20 @@ class BudgetListView(LoginRequiredMixin, ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        return Budget.objects.filter(user=self.request.user).order_by('-start_date')
+        return Budget.objects.filter(user=self.request.user).order_by('start_date')
+
+class GoalCreateView(LoginRequiredMixin, CreateActionFormValidMixin, OperationNameContextMixin, CreateView):
+    model = FinancialGoal
+    form_class = GoalForm
+    template_name = 'personal_actions_templates/create_action.html'
+    success_url = reverse_lazy('show-goals')
+    operation_name = 'Goal'
+
+class GoalListView(LoginRequiredMixin, ListView):
+    model = FinancialGoal
+    template_name = 'personal_actions_templates/goal_templates/goal_list.html'
+    context_object_name = 'goals'
+    paginate_by = 5
+
+    def get_queryset(self):
+        return FinancialGoal.objects.filter(user=self.request.user).order_by('-target_amount', '-deadline')

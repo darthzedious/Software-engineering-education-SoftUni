@@ -8,5 +8,10 @@
         <li>{{ goal.title }}: {{ goal.saved_amount }}/{{ goal.target_amount }} (Deadline: {{ goal.deadline }})</li>
     {% endfor %}
 </ul>
+    {% include 'personal_actions_templates/pagination.html' %}
+    
+    <a href="{% url 'create-goal' %}" class="btn btn-light">
+        Add Goal
+    </a>
 
 {% endblock %}

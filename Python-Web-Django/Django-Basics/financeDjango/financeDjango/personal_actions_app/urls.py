@@ -9,4 +9,6 @@ urlpatterns = [
     path('show-portfolio/', views.PortfolioListView.as_view(), name='show-portfolio'),
     path('create-budget/', views.BudgetCreateView.as_view(), name='create-budget'),
     path('show-budget/', views.BudgetListView.as_view(), name='show-budgets'),
+    path('create-goal/', views.GoalCreateView.as_view(), name='create-goal'),
+    path('show-goals/', views.GoalListView.as_view(), name='show-goals'),
 ]
