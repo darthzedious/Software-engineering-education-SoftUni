@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView
 
+from financeDjango.mixins import PlaceholderMixin
 from financeDjango.personal_actions_app.forms import TransactionForm
 from financeDjango.personal_actions_app.models import Transaction
 
@@ -25,4 +26,7 @@ class TransactionListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Transaction.objects.filter(user=self.request.user).order_by('-date')
+
+
+class CreatePortfolioView(LoginRequiredMixin, CreateView):
 

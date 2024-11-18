@@ -1,0 +1,12 @@
+{% extends 'home_menu/home.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Your Portfolios</h2>
+<ul>
+    {% for portfolio in portfolios %}
+        <li>{{ portfolio.name }} - {{ portfolio.description }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
