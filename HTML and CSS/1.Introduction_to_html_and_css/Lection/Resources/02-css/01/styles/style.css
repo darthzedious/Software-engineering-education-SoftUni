@@ -1,0 +1,38 @@
+h1{
+    color: blue;
+}
+
+p{
+    font-size: 15px;
+}
+
+.highlight{
+    background-color: blueviolet;
+}
+
+.divClass{
+    background-color: coral;
+    font-family: monospace;
+    font-size: 30px;
+}
+
+#divID{
+    font-style: italic;
+    font-stretch: expanded;
+}
+
+#main-title{
+    color:limegreen
+}
+
+#special-paragraph{
+    font-style: italic;
+}
+
+ul{
+    list-style-type: circle;
+}
+
+li{
+    color: aqua;
+}
