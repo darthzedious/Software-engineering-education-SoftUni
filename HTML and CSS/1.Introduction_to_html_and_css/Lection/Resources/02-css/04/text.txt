@@ -1,7 +1,7 @@
 Home
 About
 Services
-Our Services
+
 Service 1 description...
 
 Service 2 description...

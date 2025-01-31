@@ -1,0 +1,28 @@
+p.pclass{
+    color: aquamarine;
+    font-size: 100;
+}
+
+#divID{
+    background-color: aqua;
+}
+
+div#divID{
+    background-color: blueviolet;
+    padding: 10ch;
+}
+
+.multiple-class.example-class{
+    font-style: italic;
+    font-weight: bold;
+}
+
+.example-class{
+    color: brown;
+    font-weight: 300;
+}
+
+.test-class{
+    font-size: large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

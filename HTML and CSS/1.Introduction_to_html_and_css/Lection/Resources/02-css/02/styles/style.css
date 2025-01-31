@@ -1,0 +1,19 @@
+div p {
+    color:aquamarine
+}
+
+ul > li {
+    list-style-type: disc;
+}
+
+/* Adjacent Sibling Combinator: Style a <p> that immediately follows another <p> */
+p + p {
+    background-color: lightblue;
+}
+  
+  /* General Sibling Combinator: Style all <span> siblings of any <p> */
+p ~ span {
+    font-weight: bold;
+    color: red;
+}
+  

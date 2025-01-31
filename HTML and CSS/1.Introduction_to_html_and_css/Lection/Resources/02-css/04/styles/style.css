@@ -1,0 +1,21 @@
+nav a{
+    color: chartreuse;
+}
+
+a{
+    color: blue;
+}
+
+div > section.class-one{
+    background-color: crimson;
+    padding: 10px;
+}
+
+section + h3{
+    border-top: italic;
+    color: darkgreen
+}
+
+section.class-two ~ article{
+    color: darkorchid;
+}
