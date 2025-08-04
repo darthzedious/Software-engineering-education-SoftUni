@@ -1,26 +1,34 @@
-function theatrePromotions(day, age){
+function theatrePromotions(day, age) {
     let price;
-    if (day === 'Weekday' && 0 <= age <= 18)
-        price = 12
-    else if(day === 'Weekday' && 18 <= age <= 64)
-        price = 18
-    else if(day === 'Weekday' && 64 <= age <= 122)
-        price = 12
-    else if(day === 'Weekend' && 0 <= age <= 18)
-        price = 15
-    else if(day === 'Weekend' && 18 <= age <= 64)
-        price = 20
-    else if(day === 'Weekend' && 64 <= age <= 122)
-        price = 15
-    else if(day === 'Holiday' && 0 <= age <= 18)
-        price = 5
-    else if(day === 'Holiday' && 18 <= age <= 64)
-        price = 12
-    else if(day === 'Holiday' && 64 <= age <= 122)
-        price = 10
-    else
-        return "Error"
-    console.log(`${price}$`)
+
+    if (age < 0 || age > 122) {
+        console.log("Error!");
+        return;
+    }
+
+    if (day === 'Weekday') {
+        if (age <= 18) price = 12;
+        else if (age <= 64) price = 18;
+        else price = 12;
+    } else if (day === 'Weekend') {
+        if (age <= 18) price = 15;
+        else if (age <= 64) price = 20;
+        else price = 15;
+    } else if (day === 'Holiday') {
+        if (age <= 18) price = 5;
+        else if (age <= 64) price = 12;
+        else price = 10;
+    }
+
+    if (price !== undefined) {
+        console.log(`${price}$`);
+    } else {
+        console.log("Error!");
+    }
 }
 
-theatrePromotions('Weekday', 18)
+// Test cases
+theatrePromotions('Weekday', 18);    // 12$
+theatrePromotions('Weekend', 42);    // 20$
+theatrePromotions('Holiday', -12);   // Error!
+theatrePromotions('Holiday', 15);    // 5$

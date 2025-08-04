@@ -3,4 +3,5 @@ function solve(){
         console.log(i)
     }
 }
+
 solve()

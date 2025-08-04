@@ -1,6 +1,6 @@
 function monthPrinter(number){
     if (number > 12 || number < 1)
-        console.log('Error')
+        console.log('Error!')
     else if (number === 1)
         console.log('January')
     else if (number === 2)
