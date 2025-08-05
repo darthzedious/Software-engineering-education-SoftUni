@@ -1,58 +1,41 @@
-function solve(speed, road){
-    let difference = 0;
-    let speedAsInt = Number(speed)
+function solve(speed, road) {
+    const limits = {
+        motorway: 130,
+        interstate: 90,
+        city: 50,
+        residential: 20
+    };
 
-    if (road === 'motorway'){
-        if (speedAsInt <= 130){
-            console.log(`Driving ${speedAsInt} km/h in a 130 zone`)
-        } else {
-            difference = speedAsInt - 130
-            let status = speedStatus(difference)
-            console.log(`The speed is ${difference} km/h faster than the allowed speed of 130 - ${status}`)
-        }
-    } else if (road === 'interstate'){
-        if (speedAsInt <= 90){
-            console.log(`Driving ${speedAsInt} km/h in a 90 zone`)
-        } else {
-            difference = speedAsInt - 90
-            let status = speedStatus(difference)
-            console.log(`The speed is ${difference} km/h faster than the allowed speed of 90 - ${status}`)
-        } 
-    } else if (road === 'city'){
-        if (speedAsInt <= 50){
-            console.log(`Driving ${speedAsInt} km/h in a 50 zone`)
-        } else {
-            difference = speedAsInt - 50
-            let status = speedStatus(difference)
-            console.log(`The speed is ${difference} km/h faster than the allowed speed of 50 - ${status}`)
-        }
-    } else if (road === 'residential'){
-        if (speedAsInt <= 20){
-            console.log(`Driving ${speedAsInt} km/h in a 20 zone`)
-        } else {
-            difference = speedAsInt - 20
-            let status = speedStatus(difference)
-            console.log(`The speed is ${difference} km/h faster than the allowed speed of 20 - ${status}`)
-        }
-    }
-    
-}
+    const limit = limits[road];
+    const speedAsInt = Number(speed);
+    const difference = speedAsInt - limit;
 
-
-function speedStatus(difference){
-    let status = '';
-
-    if (difference <= 20){
-        status = 'speeding'
-    } else if (difference <= 40){
-        status = 'excessive speeding'
+    if (difference <= 0) {
+        console.log(`Driving ${speedAsInt} km/h in a ${limit} zone`);
     } else {
-        status = 'reckless driving'
+        const status = speedStatus(difference);
+        console.log(`The speed is ${difference} km/h faster than the allowed speed of ${limit} - ${status}`);
     }
-    return status
 }
 
-solve(40, 'city')
-solve(21, 'residential')
-solve(120, 'interstate')
-solve(200, 'motorway')
+function speedStatus(difference) {
+    if (difference <= 20) {
+        return 'speeding';
+    } else if (difference <= 40) {
+        return 'excessive speeding';
+    } else {
+        return 'reckless driving';
+    }
+}
+
+solve(40, 'city');
+
+
+solve(21, 'residential');
+
+
+solve(120, 'interstate');
+
+
+solve(200, 'motorway');
+

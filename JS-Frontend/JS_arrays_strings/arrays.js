@@ -15,7 +15,7 @@ empty[0] = 1;
 empty[1] = 2;
 console.log(empty);
 
-// Get length of an index
+// Get length of an array
 console.log(names.length);
 
 // Accessing by index
